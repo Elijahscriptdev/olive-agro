@@ -104,14 +104,14 @@ const IconGroup = ({
           </span>
         </Link>
       </div> */}
-      {/* <div className="same-style mobile-off-canvas d-block d-lg-none">
+      <div className="same-style mobile-off-canvas d-block d-lg-none">
         <button
           className="mobile-aside-button"
           onClick={() => triggerMobileMenu()}
         >
           <i className="pe-7s-menu" />
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };
