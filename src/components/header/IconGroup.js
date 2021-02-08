@@ -66,52 +66,52 @@ const IconGroup = ({
           </ul>
         </div>
       </div>
-      <div className="same-style header-compare">
+      {/* <div className="same-style header-compare">
         <Link to={process.env.PUBLIC_URL + "/compare"}>
           <i className="pe-7s-shuffle" />
           <span className="count-style">
             {compareData && compareData.length ? compareData.length : 0}
           </span>
         </Link>
-      </div>
-      <div className="same-style header-wishlist">
+      </div> */}
+      {/* <div className="same-style header-wishlist">
         <Link to={process.env.PUBLIC_URL + "/wishlist"}>
           <i className="pe-7s-like" />
           <span className="count-style">
             {wishlistData && wishlistData.length ? wishlistData.length : 0}
           </span>
         </Link>
-      </div>
-      <div className="same-style cart-wrap d-none d-lg-block">
+      </div> */}
+      {/* <div className="same-style cart-wrap d-none d-lg-block">
         <button className="icon-cart" onClick={e => handleClick(e)}>
           <i className="pe-7s-shopbag" />
           <span className="count-style">
             {cartData && cartData.length ? cartData.length : 0}
           </span>
         </button>
-        {/* menu cart */}
+         menu cart==comment
         <MenuCart
           cartData={cartData}
           currency={currency}
           deleteFromCart={deleteFromCart}
         />
-      </div>
-      <div className="same-style cart-wrap d-block d-lg-none">
+      </div> */}
+      {/* <div className="same-style cart-wrap d-block d-lg-none">
         <Link className="icon-cart" to={process.env.PUBLIC_URL + "/cart"}>
           <i className="pe-7s-shopbag" />
           <span className="count-style">
             {cartData && cartData.length ? cartData.length : 0}
           </span>
         </Link>
-      </div>
-      <div className="same-style mobile-off-canvas d-block d-lg-none">
+      </div> */}
+      {/* <div className="same-style mobile-off-canvas d-block d-lg-none">
         <button
           className="mobile-aside-button"
           onClick={() => triggerMobileMenu()}
         >
           <i className="pe-7s-menu" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
