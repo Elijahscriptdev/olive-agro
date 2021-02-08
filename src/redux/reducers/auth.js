@@ -30,8 +30,8 @@ export default function (state = initialState, action) {
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem("token", payload.jwt);
-      localStorage.setItem("user", JSON.stringify(payload.user));
+      localStorage.setItem("token", payload.users.token);
+      localStorage.setItem("user", JSON.stringify(payload.users));
       return {
         ...state,
         ...payload,

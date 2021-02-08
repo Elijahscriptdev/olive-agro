@@ -23,21 +23,21 @@ export const loadUser = () => async (dispatch) => {
 
   try {
     const res = await axios.get(
-      "https://travel-backend-api.herokuapp.com/auto_login",
+      "https://young-shelf-13485.herokuapp.com/api/auth/getUser",
       config
     );
-    if (res.data.errors === "No User Logged In") {
-      const errorArr = { Failure: [[res.data]] };
-      dispatch({
-        type: AUTH_ERROR,
-        payload: errorArr,
-      });
-    } else {
-      dispatch({
-        type: USER_LOADED,
-        payload: res.data,
-      });
-    }
+    // if (res.data.errors === "No User Logged In") {
+    //   const errorArr = { Failure: [[res.data]] };
+    //   dispatch({
+    //     type: AUTH_ERROR,
+    //     payload: errorArr,
+    //   });
+    // } else {
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+    // }
   } catch (error) {
     dispatch({
       type: AUTH_ERROR,
@@ -46,20 +46,30 @@ export const loadUser = () => async (dispatch) => {
 };
 
 // Register User
-export const register = ({ first_name, last_name, email, password }) => async (
-  dispatch
-) => {
+export const register = ({
+  firstName,
+  lastName,
+  email,
+  phoneNumber,
+  password,
+}) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  const body = JSON.stringify({ first_name, last_name, email, password });
+  const body = JSON.stringify({
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    password,
+  });
 
   try {
     const res = await axios.post(
-      "https://travel-backend-api.herokuapp.com/users",
+      "https://young-shelf-13485.herokuapp.com/api/users/create/user",
       body,
       config
     );
@@ -70,7 +80,7 @@ export const register = ({ first_name, last_name, email, password }) => async (
     dispatch(loadUser());
   } catch (error) {
     // dispatch(setAlert(error.response.data.errors, "danger"));
-    console.log(error.response.data.errors);
+    console.log(error.response);
     dispatch({
       type: REGISTER_FAIL,
     });
@@ -89,22 +99,22 @@ export const login = ({ email, password }) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      "https://travel-backend-api.herokuapp.com/login",
+      "https://young-shelf-13485.herokuapp.com/api/auth/login",
       body,
       config
     );
-    if (res.data.failure === "Log in failed! Username or password invalid!") {
-      const errorArr = { Failure: [[res.data]] };
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: errorArr,
-      });
-    } else {
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: res.data,
-      });
-    }
+    // if (res.data.failure === "Log in failed! Username or password invalid!") {
+    //   const errorArr = { Failure: [[res.data]] };
+    //   dispatch({
+    //     type: LOGIN_FAIL,
+    //     payload: errorArr,
+    //   });
+    // } else {
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+    // }
     dispatch(loadUser());
   } catch (error) {
     // dispatch(setAlert(error.response.data.errors, "danger"));

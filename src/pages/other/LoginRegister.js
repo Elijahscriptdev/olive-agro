@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
@@ -12,31 +12,40 @@ import { login, register } from "../../redux/actions/auth";
 
 const LoginRegister = ({ location, register, login, isAuthenticated }) => {
   const { pathname } = location;
+  let history = useHistory();
 
   // Register
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     email: "",
+    phoneNumber: "",
     password: "",
     password2: "",
   });
 
-  const { first_name, last_name, email, password, password2 } = formData;
+  const {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    password,
+    password2,
+  } = formData;
 
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(formData);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    register({ first_name, last_name, email, password });
+    register({ firstName, lastName, email, phoneNumber, password });
     console.log(formData);
     console.log("form submitted");
+    history.push('/login-register');
   };
 
   // login
@@ -135,18 +144,18 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                               <input
                                 className='p'
                                 type='text'
-                                value={first_name}
+                                value={firstName}
                                 placeholder='First Name'
-                                name='first_name'
+                                name='firstName'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
                               <input
                                 className='p'
                                 type='text'
-                                value={last_name}
+                                value={lastName}
                                 placeholder='Last Name'
-                                name='last_name'
+                                name='lastName'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
@@ -155,6 +164,14 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={email}
                                 placeholder='eee@gmail.com'
                                 name='email'
+                                onChange={(e) => onChange(e)}
+                                // required
+                              />
+                              <input
+                                type='tel'
+                                value={phoneNumber}
+                                placeholder='08012345678'
+                                name='phoneNumber'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
