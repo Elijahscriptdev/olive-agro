@@ -6,6 +6,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
+// import VendorRegister from "./pages/other/VendorRegister";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeFashion"));
@@ -101,6 +102,7 @@ const About = lazy(() => import("./pages/other/About"));
 const Contact = lazy(() => import("./pages/other/Contact"));
 const MyAccount = lazy(() => import("./pages/other/MyAccount"));
 const LoginRegister = lazy(() => import("./pages/other/LoginRegister"));
+const VendorRegister = lazy(() => import("./pages/other/VendorRegister"));
 
 const Cart = lazy(() => import("./pages/other/Cart"));
 const Wishlist = lazy(() => import("./pages/other/Wishlist"));
@@ -116,21 +118,21 @@ const App = (props) => {
         languages: {
           en: require("./translations/english.json"),
           fn: require("./translations/french.json"),
-          de: require("./translations/germany.json")
-        }
+          de: require("./translations/germany.json"),
+        },
       })
     );
   });
 
   return (
-    <ToastProvider placement="bottom-left">
+    <ToastProvider placement='bottom-left'>
       <BreadcrumbsProvider>
         <Router>
           <ScrollToTop>
             <Suspense
               fallback={
-                <div className="flone-preloader-wrapper">
-                  <div className="flone-preloader">
+                <div className='flone-preloader-wrapper'>
+                  <div className='flone-preloader'>
                     <span></span>
                     <span></span>
                   </div>
@@ -401,6 +403,11 @@ const App = (props) => {
                 />
 
                 <Route
+                  path={process.env.PUBLIC_URL + "/vendor-register"}
+                  component={VendorRegister}
+                />
+
+                <Route
                   path={process.env.PUBLIC_URL + "/cart"}
                   component={Cart}
                 />
@@ -433,7 +440,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 };
 
 export default connect()(multilanguage(App));

@@ -103,10 +103,10 @@ const Contact = ({ location }) => {
                     </div>
                     <div className='contact-info-dec'>
                       <p>
-                        <a href='mailto:urname@email.com'>urname@email.com</a>
+                        <a href='mailto:urname@email.com'>Info@oliveagro.org</a>
                       </p>
                       <p>
-                        <a href='//urwebsitenaem.com'>urwebsitenaem.com</a>
+                        <a href='//urwebsitenaem.com'>oliveagro.org</a>
                       </p>
                     </div>
                   </div>
@@ -127,21 +127,21 @@ const Contact = ({ location }) => {
                           <i className='fa fa-facebook' />
                         </a>
                       </li>
-                      <li>
+                      {/* <li>
                         <a href='//pinterest.com'>
                           <i className='fa fa-pinterest-p' />
                         </a>
-                      </li>
+                      </li> */}
                       <li>
                         <a href='//thumblr.com'>
                           <i className='fa fa-tumblr' />
                         </a>
                       </li>
-                      <li>
+                      {/* <li>
                         <a href='//vimeo.com'>
                           <i className='fa fa-vimeo' />
                         </a>
-                      </li>
+                      </li> */}
                       <li>
                         <a href='//twitter.com'>
                           <i className='fa fa-twitter' />

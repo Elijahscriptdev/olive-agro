@@ -498,6 +498,11 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
               {strings["contact_us"]}
             </Link>
           </li>
+          <li>
+            <Link to={process.env.PUBLIC_URL + "/vendor-register"}>
+              Register as a Vendor
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
