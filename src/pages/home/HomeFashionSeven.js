@@ -21,7 +21,7 @@ const HomeFashionSeven = () => {
       <LayoutOne
         headerContainerClass="container-fluid"
         headerPaddingClass="header-padding-2"
-        headerTop="visible"
+        // headerTop="visible"
       >
         {/* hero slider */}
         <HeroSliderFifteen />
