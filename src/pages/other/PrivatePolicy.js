@@ -86,7 +86,7 @@ const PrivatePolicy = ({ location }) => {
               remember that no method of transmission over the Internet, or
               method of electronic storage, is 100% secure. While we strive to
               use commercially acceptable means to protect your Personal
-              Information, we cannot guarantee its absolute security.Changes to
+              Information, we cannot guarantee its absolute security. Changes to
               This Privacy Policy
             </p>
           </div>

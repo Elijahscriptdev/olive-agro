@@ -2,14 +2,14 @@
   {
     "id": 1,
     "title": "Smart Products",
-    "subtitle": "Winter Offer 2020 Collection",
-    "image": "/assets/img/slider/single-slide-hm1-2.png",
+    "subtitle": "Pest free agricultural products",
+    "image": "/assets/img/slider/cashew.jpg",
     "url": "/shop-grid-standard"
   },
   {
     "id": 2,
     "title": "Smart Products",
-    "subtitle": "Summer Offer 2020 Collection",
+    "subtitle": "Best farmers in town working together",
     "image": "/assets/img/slider/single-slide-1.png",
     "url": "/shop-grid-standard"
   }
