@@ -21,6 +21,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
     email: "",
     document: "",
     id: "",
+    phytosanitary: "",
     phoneNumber: "",
     password: "",
     password2: "",
@@ -32,6 +33,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
     email,
     document,
     id,
+    phytosanitary,
     phoneNumber,
     password,
     password2,
@@ -109,48 +111,64 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                         <div className='login-form-container'>
                           <div className='login-register-form'>
                             <form onSubmit={(e) => onSubmit(e)}>
+                            <label>Company Name</label>
                               <input
                                 className='p'
                                 type='text'
                                 value={companyName}
-                                placeholder='Company Name'
+                                placeholder=''
                                 name='companyName'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Company Address</label>
                               <input
                                 className='p'
                                 type='text'
                                 value={companyAddress}
-                                placeholder='Company Address'
+                                placeholder=''
                                 name='companyAddress'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Email address</label>
                               <input
                                 type='email'
                                 value={email}
-                                placeholder='Email address'
+                                placeholder=''
                                 name='email'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>CAC documents</label>
                               <input
-                                type='text'
+                                type='file'
                                 value={document}
-                                placeholder='CAC documents'
+                                placeholder=''
                                 name='document'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Directors ID, (drivers license, international passport, voters card)</label>
                               <input
-                                type='text'
+                                type='file'
                                 value={id}
                                 placeholder='Directors ID, (drivers license, international passport, voters card)'
                                 name='id'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Phytosanitary certificate
+                              <input
+                                type='file'
+                                value={phytosanitary}
+                                placeholder='Phytosanitary certificate'
+                                name='phytosanitary'
+                                onChange={(e) => onChange(e)}
+                                // required
+                              />
+                              </label>
+                              <label className="red">Phone Number</label>
                               <input
                                 type='tel'
                                 value={phoneNumber}
@@ -159,6 +177,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Password</label>
                               <input
                                 type='password'
                                 placeholder='************'
@@ -167,6 +186,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 onChange={(e) => onChange(e)}
                                 // minLength='6'
                               />
+                              <label>Confirm Password</label>
                               <input
                                 type='password'
                                 placeholder='************'
@@ -189,40 +209,54 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                         <div className='login-form-container'>
                           <div className='login-register-form'>
                             <form onSubmit={(e) => onSubmit(e)}>
+                            <label>Name</label>
                               <input
                                 className='p'
                                 type='text'
                                 value={companyName}
-                                placeholder='Name'
+                                placeholder=''
                                 name='companyName'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Address</label>
                               <input
                                 className='p'
                                 type='text'
                                 value={companyAddress}
-                                placeholder='Address'
+                                placeholder=''
                                 name='companyAddress'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Email address</label>
                               <input
                                 type='email'
                                 value={email}
-                                placeholder='Email address'
+                                placeholder=''
                                 name='email'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>CAC documents</label>
                               <input
-                                type='text'
+                                type='file'
+                                value={document}
+                                placeholder=''
+                                name='document'
+                                onChange={(e) => onChange(e)}
+                                // required
+                              />
+                              <label>ID, (drivers license, international passport, voters card)</label>
+                              <input
+                                type='file'
                                 value={id}
                                 placeholder='Directors ID, (drivers license, international passport, voters card)'
                                 name='id'
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label className="red">Phone Number</label>
                               <input
                                 type='tel'
                                 value={phoneNumber}
@@ -231,6 +265,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 onChange={(e) => onChange(e)}
                                 // required
                               />
+                              <label>Password</label>
                               <input
                                 type='password'
                                 placeholder='************'
@@ -239,6 +274,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 onChange={(e) => onChange(e)}
                                 // minLength='6'
                               />
+                              <label>Confirm Password</label>
                               <input
                                 type='password'
                                 placeholder='************'
