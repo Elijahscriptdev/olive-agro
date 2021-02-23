@@ -8,7 +8,7 @@ import FooterNewsletter from "../../components/footer/FooterNewsletter";
 const FooterThree = ({
   backgroundColorClass,
   spaceTopClass,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [scroll, setScroll] = useState(0);
   const [top, setTop] = useState(0);
@@ -37,22 +37,22 @@ const FooterThree = ({
         spaceBottomClass ? spaceBottomClass : ""
       }`}
     >
-      <div className="container">
-        <div className="footer-border pt-100">
-          <div className="row">
-            <div className="col-lg-2 col-sm-4">
+      <div className='container'>
+        <div className='footer-border pt-100'>
+          <div className='row'>
+            <div className='col-lg-2 col-sm-4'>
               {/* footer copyright */}
               <FooterCopyright
-                footerLogo="/assets/img/logo/logo.png"
-                spaceBottomClass="mb-30"
+                footerLogo='/assets/img/logo/logo.png'
+                spaceBottomClass='mb-30'
               />
             </div>
-            <div className="col-lg-2 col-md-4 col-sm-4">
-              <div className="footer-widget mb-30 ml-30">
-                <div className="footer-title">
+            <div className='col-lg-2 col-md-4 col-sm-4'>
+              <div className='footer-widget mb-30 ml-30'>
+                <div className='footer-title'>
                   <h3>ABOUT US</h3>
                 </div>
-                <div className="footer-list">
+                <div className='footer-list'>
                   <ul>
                     <li>
                       <Link to={process.env.PUBLIC_URL + "/about"}>
@@ -78,19 +78,19 @@ const FooterThree = ({
                 </div>
               </div>
             </div>
-            <div className="col-lg-2 col-md-4 col-sm-4">
-              <div className="footer-widget mb-30 ml-50">
-                <div className="footer-title">
+            <div className='col-lg-2 col-md-4 col-sm-4'>
+              <div className='footer-widget mb-30 ml-50'>
+                <div className='footer-title'>
                   <h3>USEFUL LINKS</h3>
                 </div>
-                <div className="footer-list">
+                <div className='footer-list'>
                   <ul>
                     <li>
                       <Link to={process.env.PUBLIC_URL + "#/"}>Returns</Link>
                     </li>
                     <li>
-                      <Link to={process.env.PUBLIC_URL + "#/"}>
-                        Support Policy
+                      <Link to={process.env.PUBLIC_URL + "/private-policy"}>
+                        Private Policy
                       </Link>
                     </li>
                     <li>
@@ -103,45 +103,45 @@ const FooterThree = ({
                 </div>
               </div>
             </div>
-            <div className="col-lg-2 col-md-6 col-sm-6">
-              <div className="footer-widget mb-30 ml-75">
-                <div className="footer-title">
+            <div className='col-lg-2 col-md-6 col-sm-6'>
+              <div className='footer-widget mb-30 ml-75'>
+                <div className='footer-title'>
                   <h3>FOLLOW US</h3>
                 </div>
-                <div className="footer-list">
+                <div className='footer-list'>
                   <ul>
                     <li>
                       <a
-                        href="//www.facebook.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href='//www.facebook.com'
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
                         Facebook
                       </a>
                     </li>
                     <li>
                       <a
-                        href="//www.twitter.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href='//www.twitter.com'
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
                         Twitter
                       </a>
                     </li>
                     <li>
                       <a
-                        href="//www.instagram.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href='//www.instagram.com'
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
                         Instagram
                       </a>
                     </li>
                     <li>
                       <a
-                        href="//www.youtube.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href='//www.youtube.com'
+                        target='_blank'
+                        rel='noopener noreferrer'
                       >
                         Youtube
                       </a>
@@ -150,11 +150,11 @@ const FooterThree = ({
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-sm-6">
+            <div className='col-lg-4 col-sm-6'>
               {/* footer newsletter */}
               <FooterNewsletter
-                spaceBottomClass="mb-30"
-                spaceLeftClass="ml-70"
+                spaceBottomClass='mb-30'
+                spaceLeftClass='ml-70'
               />
             </div>
           </div>
@@ -164,7 +164,7 @@ const FooterThree = ({
         className={`scroll-top ${scroll > top ? "show" : ""}`}
         onClick={() => scrollToTop()}
       >
-        <i className="fa fa-angle-double-up"></i>
+        <i className='fa fa-angle-double-up'></i>
       </button>
     </footer>
   );
@@ -173,7 +173,7 @@ const FooterThree = ({
 FooterThree.propTypes = {
   backgroundColorClass: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  spaceTopClass: PropTypes.string
+  spaceTopClass: PropTypes.string,
 };
 
 export default FooterThree;

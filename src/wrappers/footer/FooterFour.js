@@ -112,8 +112,8 @@ const FooterFour = ({
                     <Link to={process.env.PUBLIC_URL + "#/"}>Returns</Link>
                   </li>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "#/"}>
-                      Support Policy
+                  <Link to={process.env.PUBLIC_URL + "/private-policy"}>
+                    Private Policy
                     </Link>
                   </li>
                   <li>

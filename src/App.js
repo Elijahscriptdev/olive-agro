@@ -103,6 +103,7 @@ const Contact = lazy(() => import("./pages/other/Contact"));
 const MyAccount = lazy(() => import("./pages/other/MyAccount"));
 const LoginRegister = lazy(() => import("./pages/other/LoginRegister"));
 const VendorRegister = lazy(() => import("./pages/other/VendorRegister"));
+const PrivatePolicy = lazy(() => import("./pages/other/PrivatePolicy"));
 
 const Cart = lazy(() => import("./pages/other/Cart"));
 const Wishlist = lazy(() => import("./pages/other/Wishlist"));
@@ -405,6 +406,11 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/vendor-register"}
                   component={VendorRegister}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/private-policy"}
+                  component={PrivatePolicy}
                 />
 
                 <Route
