@@ -378,7 +378,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                   </li>
                 </ul>
               </li>
-              <li>
+              {/* <li>
                 <ul>
                   <li className="mega-menu-img">
                     <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
@@ -392,7 +392,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                     </Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
             </ul>
           </li>
           {/* <li>

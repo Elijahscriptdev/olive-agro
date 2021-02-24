@@ -15,11 +15,11 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass, colorClass }) => {
         </Link>
       </div>
       <p>
-        © 2020{" "}
+        {/* © 2020{" "}
         <a href="//hasthemes.com" rel="noopener noreferrer" target="_blank">
           Flone
-        </a>
-        .<br /> All Rights Reserved
+        </a> */}
+         All Rights Reserved.
       </p>
     </div>
   );

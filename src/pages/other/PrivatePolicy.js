@@ -11,7 +11,7 @@ const PrivatePolicy = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Oliveagro | Private Policy</title>
+        <title>Oliveagro | Privacy Policy</title>
         <meta
           name='description'
           content='About page of flone react minimalist eCommerce template.'
@@ -19,7 +19,7 @@ const PrivatePolicy = ({ location }) => {
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
-        Private Policy
+        Privacy Policy
       </BreadcrumbsItem>
       <LayoutOne headerTop='visible'>
         {/* breadcrumb */}

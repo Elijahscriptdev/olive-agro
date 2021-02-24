@@ -72,11 +72,11 @@ const FooterFour = ({
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/about"}>About us</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>
                       Store location
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/contact"}>
                       Contact
@@ -112,8 +112,8 @@ const FooterFour = ({
                     <Link to={process.env.PUBLIC_URL + "#/"}>Returns</Link>
                   </li>
                   <li>
-                  <Link to={process.env.PUBLIC_URL + "/private-policy"}>
-                    Private Policy
+                  <Link to={process.env.PUBLIC_URL + "/privacy-policy"}>
+                  Privacy Policy
                     </Link>
                   </li>
                   <li>

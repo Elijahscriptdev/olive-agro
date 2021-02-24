@@ -409,7 +409,7 @@ const App = (props) => {
                 />
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/private-policy"}
+                  path={process.env.PUBLIC_URL + "/privacy-policy"}
                   component={PrivatePolicy}
                 />
 
