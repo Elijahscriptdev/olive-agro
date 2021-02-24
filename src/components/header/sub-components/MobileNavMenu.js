@@ -385,6 +385,12 @@ const MobileNavMenu = ({ strings }) => {
                 {strings["contact_us"]}
               </Link>
             </li>
+            <li>
+            <Link to={process.env.PUBLIC_URL + "/vendor-register"}>
+            {/* {strings["contact_us"]} */}
+              Register as a Vendor
+            </Link>
+          </li>
             {/* <li>
               <Link to={process.env.PUBLIC_URL + "/not-found"}>
                 {strings["404_page"]}
