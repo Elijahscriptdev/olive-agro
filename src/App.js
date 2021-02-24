@@ -110,7 +110,7 @@ const Wishlist = lazy(() => import("./pages/other/Wishlist"));
 const Compare = lazy(() => import("./pages/other/Compare"));
 const Checkout = lazy(() => import("./pages/other/Checkout"));
 
-// const NotFound = lazy(() => import("./pages/other/NotFound"));
+const NotFound = lazy(() => import("./pages/other/NotFound"));
 
 const App = (props) => {
   useEffect(() => {
@@ -435,7 +435,7 @@ const App = (props) => {
                   component={NotFound}
                 />
 
-                <Route exact component={NotFound} />
+                {/* <Route exact component={NotFound} /> */}
               </Switch>
             </Suspense>
           </ScrollToTop>
