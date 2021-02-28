@@ -6,7 +6,6 @@ import { ToastProvider } from "react-toast-notifications";
 import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
-// import VendorRegister from "./pages/other/VendorRegister";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeFashion"));
@@ -104,6 +103,7 @@ const MyAccount = lazy(() => import("./pages/other/MyAccount"));
 const LoginRegister = lazy(() => import("./pages/other/LoginRegister"));
 const VendorRegister = lazy(() => import("./pages/other/VendorRegister"));
 const PrivatePolicy = lazy(() => import("./pages/other/PrivatePolicy"));
+const AllProducts = lazy(() => import("./pages/other/AllProducts"));
 
 const Cart = lazy(() => import("./pages/other/Cart"));
 const Wishlist = lazy(() => import("./pages/other/Wishlist"));
@@ -411,6 +411,11 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/privacy-policy"}
                   component={PrivatePolicy}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/view-products"}
+                  component={AllProducts}
                 />
 
                 <Route
