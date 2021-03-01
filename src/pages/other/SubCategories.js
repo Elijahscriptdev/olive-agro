@@ -1,18 +1,18 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
-import { listProducts } from "../../redux/actions/productsActions";
+import { listSubCategories } from "../../redux/actions/subCategoriesActions";
 
-const AllProducts = () => {
-  const productList = useSelector((state) => state.productList);
-  const { products, error } = productList;
+const SubCategories = () => {
+  const subCategoryList = useSelector((state) => state.subCategoryList);
+  const { subCategories, error } = subCategoryList;
   const dispatch = useDispatch();
-  // console.log("yyy", products.products);
+  console.log("sub", subCategories);
 
   useEffect(() => {
-    dispatch(listProducts());
+    dispatch(listSubCategories());
   }, []);
 
   return (
@@ -26,10 +26,10 @@ const AllProducts = () => {
         {error ? (
           <div>{error}</div>
         ) : (
-          products.products.map((product, index) => (
+          subCategories.map((subCategory, index) => (
             <div key={index}>
-              <h1>{product.status}</h1>
-              <img src={product.imageUrl} alt='img' />
+              <h1>{subCategory.name}</h1>
+              {/* <img src={subCategory.imageUrl} alt='img' /> */}
             </div>
           ))
         )}
@@ -38,4 +38,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default SubCategories;

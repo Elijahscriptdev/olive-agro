@@ -4,6 +4,8 @@ import cartReducer from "./cartReducer";
 import wishlistReducer from "./wishlistReducer";
 import compareReducer from "./compareReducer";
 import productsReducer from "./productsReducer";
+import categoriesReducer from "./categoriesReducer";
+import subCategoriesReducer from "./subCategoriesReducer";
 import auth from "./auth"
 import { combineReducers } from "redux";
 import { createMultilanguageReducer } from "redux-multilanguage";
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
   wishlistData: wishlistReducer,
   compareData: compareReducer,
   auth,
-  productList: productsReducer
+  productList: productsReducer,
+  categoryList: categoriesReducer,
+  subCategoryList: subCategoriesReducer
 });
 
 export default rootReducer;
