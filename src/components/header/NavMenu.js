@@ -1,9 +1,35 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listCategories } from "../../redux/actions/categoriesActions";
+import { listSubCategories } from "../../redux/actions/subCategoriesActions";
 import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
 
 const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
+  const categoryList = useSelector((state) => state.categoryList);
+  const { categories, error } = categoryList;
+  const subCategoryList = useSelector((state) => state.subCategoryList);
+  const { subCategories } = subCategoryList;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listCategories());
+    dispatch(listSubCategories());
+  }, []);
+
+  const [click, setClick] = useState(false);
+
+  const handleClick = () => {
+    setClick(click);
+    console.log("working");
+  };
+
+  const handleRemove = () => {
+    setClick(!click);
+    console.log("working");
+  };
+
   return (
     <div
       className={` ${
@@ -254,21 +280,59 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
             </ul> */}
           </li>
           <li>
-            <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+            <Link to={process.env.PUBLIC_URL + "/"}>
               {" "}
               {strings["shop"]}
               {sidebarMenu ? (
                 <span>
-                  <i className="fa fa-angle-right"></i>
+                  <i className='fa fa-angle-right'></i>
                 </span>
               ) : (
-                <i className="fa fa-angle-down" />
+                <i className='fa fa-angle-down' />
               )}
             </Link>
-            <ul className="mega-menu">
-              <li>
+            <ul className='mega-menu'>
+              {categories.map((category, id) => {
+                return (
+                  <div key={id}>
+                    <li
+                      className='request-info-action'
+                      // onClick={handleClick}
+                      onMouseEnter={handleClick}
+                      onMouseLeave={handleRemove}
+                    >
+                      {category.name}
+                    </li>
+                    {subCategories.map((sub, id) => {
+                      if (category._id === sub.category_id) {
+                        return (
+                          <div
+                            key={id}
+                            className={
+                              click
+                                ? "request-info-dropdown active"
+                                : "request-info-dropdown"
+                            }
+                          >
+                            <ul className='nav__submenu'>
+                              <li key={id} className='nav__submenu-item'>
+                                <Link to='/' className=''>
+                                  {sub.name}
+                                </Link>
+                              </li>
+                              <br />
+                            </ul>
+                            {console.log(sub.name)}
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
+                );
+              })}
+              {/* <li>
                 <ul>
-                  <li className="mega-menu-title">
+                  <li className='mega-menu-title'>
                     <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
                       {strings["shop_layout"]}
                     </Link>
@@ -324,7 +388,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
               </li>
               <li>
                 <ul>
-                  <li className="mega-menu-title">
+                  <li className='mega-menu-title'>
                     <Link to={process.env.PUBLIC_URL + "/product/1"}>
                       {strings["product_details"]}
                     </Link>
@@ -377,7 +441,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                     </Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               {/* <li>
                 <ul>
                   <li className="mega-menu-img">
@@ -512,7 +576,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
 NavMenu.propTypes = {
   menuWhiteClass: PropTypes.string,
   sidebarMenu: PropTypes.bool,
-  strings: PropTypes.object
+  strings: PropTypes.object,
 };
 
 export default multilanguage(NavMenu);

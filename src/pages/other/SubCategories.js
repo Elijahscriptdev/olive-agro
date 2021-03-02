@@ -29,7 +29,6 @@ const SubCategories = () => {
           subCategories.map((subCategory, index) => (
             <div key={index}>
               <h1>{subCategory.name}</h1>
-              {/* <img src={subCategory.imageUrl} alt='img' /> */}
             </div>
           ))
         )}

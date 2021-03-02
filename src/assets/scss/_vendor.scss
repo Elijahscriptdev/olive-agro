@@ -1,4 +1,29 @@
 input[type="file"] {
-    cursor:pointer;
-    padding-top: 5px!important;
+  cursor: pointer;
+  padding-top: 5px !important;
+}
+
+.mega-menu {
+  position: relative;
+  width: 200px;
+}
+
+.request-info-action {
+  margin: 5px 0;
+  border-bottom: 1px solid green;
+  padding: 5px 0 8px !important;
+  cursor: pointer;
+  width: 40%;
+}
+
+.request-info-dropdown {
+  position: absolute;
+  right: 30px;
+  // bottom: 16.27%;
+  background: #ffffff;
+  border-radius: 4px;
+  display: none;
+}
+.active {
+  display: block;
 }
