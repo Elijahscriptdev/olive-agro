@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const AllProducts = ({ sliderClassName, spaceBottomClass }) => {
   const productList = useSelector((state) => state.productList);
-  const { products, error } = productList;
+  const { products, loading } = productList;
   const dispatch = useDispatch();
   // console.log("yyy", products.products);
 
@@ -23,9 +23,9 @@ const AllProducts = ({ sliderClassName, spaceBottomClass }) => {
         <meta name='Display Products' content='Display Products.' />
       </MetaTags>
       <LayoutOne headerTop='visible'>
-        <div className='container'>
+        <div className='containe'>
           <div className='row'>
-            {products.products.map((product, index) => {
+            {loading ? <div>loading......</div> : products.map((product, index) => {
               return (
                 <div
                   key={index}
@@ -46,11 +46,12 @@ const AllProducts = ({ sliderClassName, spaceBottomClass }) => {
                           alt=''
                         />
 
-                        <img
+                        {/* <img
                           className='hover-img'
                           src={process.env.PUBLIC_URL + product.imageUrl}
                           alt=''
-                        />
+                        /> */}
+                        <h4>{product.name}</h4>
                       </Link>
                     </div>
                   </div>

@@ -10,7 +10,7 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
   const categoryList = useSelector((state) => state.categoryList);
   const { categories, error } = categoryList;
   const dispatch = useDispatch();
-  console.log("yyy", categories);
+  // console.log("yyy", categories);
 
   useEffect(() => {
     dispatch(listCategories());
@@ -46,12 +46,14 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
                           alt=''
                         />
 
-                        <img
+                        {/* <img
                           className='hover-img'
                           src={process.env.PUBLIC_URL + category.imageUrl}
                           alt=''
-                        />
+                        /> */}
+                        <h4>{category.name}</h4>
                       </Link>
+                      
                     </div>
                   </div>
                 </div>

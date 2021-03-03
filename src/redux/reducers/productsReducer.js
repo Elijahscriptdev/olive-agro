@@ -2,6 +2,7 @@ import { PRODUCTS_SUCCESS, PRODUCTS_FAILURE } from "../actions/productsActions";
 
 const initialState = {
   products: [],
+  loading: true
 };
 
 export default function (state = initialState, action) {
@@ -12,13 +13,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         ...payload,
-        products: payload,
+        loading: false,
+        products: payload.products,
       };
       
     case PRODUCTS_FAILURE:
       return {
         ...state,
-        error: payload
+        loading: false,
+        error: payload.message
       };
     default:
       return state;

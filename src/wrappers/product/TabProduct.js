@@ -36,11 +36,6 @@ const TabProduct = ({
                 <h4>Products</h4>
               </Nav.Link>
             </Nav.Item>
-            {/* <Nav.Item>
-              <Nav.Link eventKey="saleItems">
-                <h4>Sale Items</h4>
-              </Nav.Link>
-            </Nav.Item> */}
           </Nav>
           <Tab.Content>
             <Tab.Pane eventKey='bestSeller'>
@@ -49,16 +44,6 @@ const TabProduct = ({
             <Tab.Pane eventKey='newArrival'>
               <AllProducts />
             </Tab.Pane>
-            {/* <Tab.Pane eventKey="saleItems">
-              <div className="row">
-                <ProductGrid
-                  category={category}
-                  type="saleItems"
-                  limit={8}
-                  spaceBottomClass="mb-25"
-                />
-              </div>
-            </Tab.Pane> */}
           </Tab.Content>
         </Tab.Container>
       </div>

@@ -13,14 +13,8 @@
   },
   {
     "id": 3,
-    "subtitle": "Best farmers in town working together",
-    "image": "https://res.cloudinary.com/elijjaaahhhh/image/upload/v1600127183/grilled-ribs-wooden-board-tomato-pepper-potato-top-view_141793-3749_-_Copy_z54zlj.jpg",
-    "url": "/shop-grid-standard"
-  },
-  {
-    "id": 4,
-    "subtitle": "Pest free agricultural products",
-    "image": "https://res.cloudinary.com/elijjaaahhhh/image/upload/v1600085435/gd5jksubvfptjbsbj65s.jpg",
+    "subtitle": "Quality farm produce",
+    "image": "/assets/img/slider/tomatoes.jpg",
     "url": "/shop-grid-standard"
   }
 ]

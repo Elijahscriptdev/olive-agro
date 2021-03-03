@@ -5,29 +5,58 @@ input[type="file"] {
 
 .mega-menu {
   position: relative;
-  width: 200px;
+  // width: 200px;
+
+  .request-info-action {
+    display: flex;
+    flex-direction: column !important;
+    margin: 0;
+    border-bottom: 1px solid green;
+    padding: 0px 0 8px !important;
+    cursor: pointer;
+    width: 40%;
+  }
+
+  .request-info-action:hover {
+    color: green;
+    font-weight: bold;
+  }
 }
 
-.request-info-action {
-  margin: 5px 0;
-  border-bottom: 1px solid green;
-  padding: 5px 0 8px !important;
-  cursor: pointer;
+.subCat {
+  background: red;
+  // padding: 0px !important;
+  // margin: 0px !important;
   width: 40%;
+  margin-left: 350px !important;
+  margin-top: -20px !important;
+  // height: 0px !important;
+
+  p {
+    // padding: 0px !important;
+    // margin: 0px !important;
+    // line-height: 50% !important;
+  }
 }
 
-.request-info-dropdown {
-  position: absolute;
-  right: 30px;
-  // bottom: 16.27%;
-  background: #ffffff;
-  border-radius: 4px;
-  display: none;
-}
-.active {
-  display: block;
+// .request-info-dropdown {
+//   position: absolute;
+//   right: 30px;
+//   bottom: 16.27%;
+//   background: #ffffff;
+//   border-radius: 4px;
+//   display: none;
+// }
+// .active {
+//   display: block;
+// }
+
+.product-img img {
+  height: 200px;
 }
 
-.product-img img{
-    height: 200px;
+.tab-pane {
+  .footer-area {
+    display: none !important;
+  }
 }
