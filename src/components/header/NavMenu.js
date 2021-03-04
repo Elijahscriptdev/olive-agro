@@ -37,9 +37,9 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
       });
   };
 
-  // const displaySub = () => {
-  //   const data = handleClick();
-  // };
+  const linkClick = (id) => {
+    console.log("testing", id);
+  };
 
   // const handleRemove = () => {
   //   setClick(!click);
@@ -86,15 +86,18 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                       <>
                         {show.map((sub, id) => {
                           return (
-                            <>
-                              <>
-                                <p key={id} className='subCat'>
-                                  <Link to='/' className=''>
-                                    {sub.name}
-                                  </Link>
+                            <div key={id}>
+                              <Link to='/from-cat' className=''>
+                              {sub.name}
+                                <p
+                                  // key={id}
+                                  className='subCat'
+                                  // onClick={() => linkClick(sub.category_id)}
+                                >
+                                  {sub.name}
                                 </p>
-                              </>
-                            </>
+                              </Link>
+                            </div>
                           );
                         })}
                       </>

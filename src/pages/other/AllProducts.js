@@ -39,7 +39,7 @@ const AllProducts = ({ sliderClassName, spaceBottomClass }) => {
                     }`}
                   >
                     <div className='product-img'>
-                      <Link to={process.env.PUBLIC_URL + "/" + product.id}>
+                      <Link to={process.env.PUBLIC_URL + "/" + product._id}>
                         <img
                           className='default-img mt-4'
                           src={process.env.PUBLIC_URL + product.imageUrl}

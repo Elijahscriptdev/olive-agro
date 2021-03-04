@@ -106,6 +106,11 @@ const PrivatePolicy = lazy(() => import("./pages/other/PrivatePolicy"));
 const AllProducts = lazy(() => import("./pages/other/AllProducts"));
 const AllCategories = lazy(() => import("./pages/other/AllCategories"));
 const SubCategories = lazy(() => import("./pages/other/SubCategories"));
+const SingleProduct = lazy(() => import("./pages/other/SingleProduct"));
+const DisplayProductsFromSub = lazy(() =>
+  import("./pages/other/DisplayProductsFromSub")
+);
+const Test = lazy(() => import("./pages/other/Test"));
 
 const Cart = lazy(() => import("./pages/other/Cart"));
 const Wishlist = lazy(() => import("./pages/other/Wishlist"));
@@ -342,12 +347,12 @@ const App = (props) => {
                 />
 
                 {/* Shop product pages */}
-                <Route
+                {/* <Route
                   path={process.env.PUBLIC_URL + "/product/:id"}
                   render={(routeProps) => (
                     <Product {...routeProps} key={routeProps.match.params.id} />
                   )}
-                />
+                /> */}
                 <Route
                   path={process.env.PUBLIC_URL + "/product-tab-left/:id"}
                   component={ProductTabLeft}
@@ -428,6 +433,21 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/view-categories"}
                   component={AllCategories}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/:id"}
+                  component={SingleProduct}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/from-cat"}
+                  component={DisplayProductsFromSub}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/test"}
+                  component={Test}
                 />
 
                 <Route

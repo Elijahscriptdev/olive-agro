@@ -93,8 +93,8 @@ const Contact = ({ location }) => {
                       <i className='fa fa-phone' />
                     </div>
                     <div className='contact-info-dec'>
-                      <p>+012 345 678 102</p>
-                      <p>+012 345 678 102</p>
+                      <p>+234 817 039 3007</p>
+                      <p>+234 810 327 4533</p>
                     </div>
                   </div>
                   <div className='single-contact-info'>
@@ -110,7 +110,7 @@ const Contact = ({ location }) => {
                       </p>
                     </div>
                   </div>
-                  <div className='single-contact-info'>
+                  {/* <div className='single-contact-info'>
                     <div className='contact-icon'>
                       <i className='fa fa-map-marker' />
                     </div>
@@ -118,7 +118,7 @@ const Contact = ({ location }) => {
                       <p>Address goes here, </p>
                       <p>street, Crossroad 123.</p>
                     </div>
-                  </div>
+                  </div> */}
                   <div className='contact-social text-center'>
                     <h3>Follow Us</h3>
                     <ul>
