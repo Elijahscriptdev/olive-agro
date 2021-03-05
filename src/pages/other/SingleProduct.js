@@ -5,6 +5,8 @@ import { listProducts } from "../../redux/actions/productsActions";
 import PropTypes from "prop-types";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
+import ContactAdmin from "./ContactAdmin";
+import ContactVendor from "./ContactVendor";
 
 const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
   const { id } = useParams();
@@ -66,9 +68,8 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
                         <p>₦{product.price_range}</p>
                         <p>Quantity: {product.quantity}</p>
                         <p>Category: {product.category_name}</p>
-                        <button className='product-detail-btn'>
-                          Contact Seller
-                        </button>
+                        <ContactVendor className='product-detail-btn' />
+                        <ContactAdmin className='product-detail-btn' />
                       </div>
                     </div>
                   </>

@@ -84,6 +84,7 @@ input[type="file"] {
     background: #404040;
     color: #fff;
     padding: 5px 10px;
+    margin-right: 20px;
   }
 
   .product-detail-btn:hover {
@@ -96,3 +97,6 @@ input[type="file"] {
   margin-top: 50px !important;
 }
 
+.textarea {
+  height: 130px;
+}
