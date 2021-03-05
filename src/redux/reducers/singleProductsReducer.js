@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
         ...state,
         ...payload,
         loading: false,
-        product: payload.product,
+        product: payload
       };
 
     case SINGLE_PRODUCTS_FAILURE:

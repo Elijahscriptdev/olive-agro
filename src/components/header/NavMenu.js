@@ -37,15 +37,6 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
       });
   };
 
-  const linkClick = (id) => {
-    console.log("testing", id);
-  };
-
-  // const handleRemove = () => {
-  //   setClick(!click);
-  //   console.log("working");
-  // };
-
   return (
     <div
       className={` ${
@@ -87,15 +78,11 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                         {show.map((sub, id) => {
                           return (
                             <div key={id}>
-                              <Link to='/from-cat' className=''>
-                              {sub.name}
-                                <p
-                                  // key={id}
-                                  className='subCat'
-                                  // onClick={() => linkClick(sub.category_id)}
-                                >
-                                  {sub.name}
-                                </p>
+                              <Link
+                                to={`/from-cat?${sub.category_id}`}
+                                className=''
+                              >
+                                {sub.name}
                               </Link>
                             </div>
                           );

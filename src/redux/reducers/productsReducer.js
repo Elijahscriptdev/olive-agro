@@ -10,6 +10,7 @@ import {
 const initialState = {
   products: [],
   loading: true,
+  error: []
 };
 
 export default function (state = initialState, action) {
@@ -44,6 +45,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
+        error: payload,
       };
     default:
       return state;

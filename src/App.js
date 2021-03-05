@@ -107,9 +107,7 @@ const AllProducts = lazy(() => import("./pages/other/AllProducts"));
 const AllCategories = lazy(() => import("./pages/other/AllCategories"));
 const SubCategories = lazy(() => import("./pages/other/SubCategories"));
 const SingleProduct = lazy(() => import("./pages/other/SingleProduct"));
-const DisplayProductsFromSub = lazy(() =>
-  import("./pages/other/DisplayProductsFromSub")
-);
+const DisplayProductsFromSub = lazy(() => import("./pages/other/DisplayProductsFromSub"));
 const Test = lazy(() => import("./pages/other/Test"));
 
 const Cart = lazy(() => import("./pages/other/Cart"));
@@ -436,7 +434,7 @@ const App = (props) => {
                 />
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/:id"}
+                  path={process.env.PUBLIC_URL + "/product/:id"}
                   component={SingleProduct}
                 />
 

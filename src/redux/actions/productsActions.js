@@ -24,6 +24,13 @@ export const listProducts = () => async (dispatch) => {
   }
 };
 
+// export const currentProducts = () => async (dispatch) => {
+//   dispatch({
+//           type: SINGLE_PRODUCTS_SUCCESS,
+//           payload: res.data,
+//         });
+// };
+
 export const detailsProducts = (id) => async (dispatch) => {
   try {
     const res = await axios.get(
@@ -33,7 +40,7 @@ export const detailsProducts = (id) => async (dispatch) => {
       type: SINGLE_PRODUCTS_SUCCESS,
       payload: res.data,
     });
-    console.log("product", res.data)
+    console.log("product", res.data);
   } catch (error) {
     dispatch({
       type: SINGLE_PRODUCTS_FAILURE,

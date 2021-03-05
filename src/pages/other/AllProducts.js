@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -10,7 +10,6 @@ const AllProducts = ({ sliderClassName, spaceBottomClass }) => {
   const productList = useSelector((state) => state.productList);
   const { products, loading } = productList;
   const dispatch = useDispatch();
-  // console.log("yyy", products.products);
 
   useEffect(() => {
     dispatch(listProducts());
@@ -25,39 +24,37 @@ const AllProducts = ({ sliderClassName, spaceBottomClass }) => {
       <LayoutOne headerTop='visible'>
         <div className='containe'>
           <div className='row'>
-            {loading ? <div>loading......</div> : products.map((product, index) => {
-              return (
-                <div
-                  key={index}
-                  className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
-                    sliderClassName ? sliderClassName : ""
-                  }`}
-                >
+            {loading ? (
+              <div>loading......</div>
+            ) : (
+              products.map((product, index) => {
+                return (
                   <div
-                    className={`product-wrap ${
-                      spaceBottomClass ? spaceBottomClass : ""
+                    key={index}
+                    className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
+                      sliderClassName ? sliderClassName : ""
                     }`}
                   >
-                    <div className='product-img'>
-                      <Link to={process.env.PUBLIC_URL + "/" + product._id}>
-                        <img
-                          className='default-img mt-4'
-                          src={process.env.PUBLIC_URL + product.imageUrl}
-                          alt=''
-                        />
-
-                        {/* <img
-                          className='hover-img'
-                          src={process.env.PUBLIC_URL + product.imageUrl}
-                          alt=''
-                        /> */}
-                        <h4>{product.name}</h4>
-                      </Link>
+                    <div
+                      className={`product-wrap ${
+                        spaceBottomClass ? spaceBottomClass : ""
+                      }`}
+                    >
+                      <div className='product-img'>
+                        <Link to={`/product/${product._id}`}>
+                          <img
+                            className='default-img mt-4'
+                            src={process.env.PUBLIC_URL + product.imageUrl}
+                            alt=''
+                          />
+                          <h4>{product.name}</h4>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
       </LayoutOne>

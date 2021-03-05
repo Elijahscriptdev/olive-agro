@@ -39,21 +39,16 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
                     }`}
                   >
                     <div className='product-img'>
-                      <Link to={process.env.PUBLIC_URL + "/" + category.id}>
+                      <Link 
+                      to={`/from-cat?${category._id}`}
+                      >
                         <img
                           className='default-img mt-4'
-                          src={process.env.PUBLIC_URL + category.imageUrl}
+                          src={category.imageUrl}
                           alt=''
                         />
-
-                        {/* <img
-                          className='hover-img'
-                          src={process.env.PUBLIC_URL + category.imageUrl}
-                          alt=''
-                        /> */}
                         <h4>{category.name}</h4>
                       </Link>
-                      
                     </div>
                   </div>
                 </div>
