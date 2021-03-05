@@ -38,7 +38,7 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
             ) : (
               matchedProduct.map((product) => {
                 return (
-                  <>
+                  <Fragment key={id}>
                     <div
                       key={id}
                       className={`col-xl-5 col-md-6 col-lg-4 col-sm-6 increase-col-height ${
@@ -72,7 +72,7 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
                         <ContactAdmin className='product-detail-btn' />
                       </div>
                     </div>
-                  </>
+                  </Fragment>
                 );
               })
             )}
