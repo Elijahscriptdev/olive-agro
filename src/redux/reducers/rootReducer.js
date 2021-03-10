@@ -11,6 +11,7 @@ import auth from "./auth";
 import { combineReducers } from "redux";
 import { createMultilanguageReducer } from "redux-multilanguage";
 import productsReducerCat from "./productsReducerCat";
+// import contactAdminVendorReducer from "./contactAdminVendorReducer";
 
 const rootReducer = combineReducers({
   multilanguage: createMultilanguageReducer({ currentLanguageCode: "en" }),
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   categoryList: categoriesReducer,
   subCategoryList: subCategoriesReducer,
   productListCat: productsReducerCat,
+  // contactAdminVendor: contactAdminVendorReducer,
 });
 
 export default rootReducer;

@@ -1,4 +1,5 @@
 import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
+import axios from "axios";
 import React, { useState } from "react";
 
 const ContactVendor = () => {
@@ -15,14 +16,6 @@ const ContactVendor = () => {
 
   const { name, email, message } = formData;
 
-  const resetForm = () => {
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
-  };
-
   const onChange = (e) => {
     setFormData({
       ...formData,
@@ -30,12 +23,31 @@ const ContactVendor = () => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    console.log("form submitted");
+    const token = localStorage.getItem("token");
+    // const body = {
+    //   name,
+    //   email,
+    //   message,
+    // };
 
-    // resetForm();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "https://www.api.oliveagro.org/api/users/create/messsage",
+        formData,
+        config
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -55,29 +67,25 @@ const ContactVendor = () => {
                 <Row form>
                   <Col md={6}>
                     <FormGroup>
-                      <label for='exampleEmail'>Name</label>
+                      <label >Name</label>
                       <input
                         type='text'
                         name='name'
-                        id='exampleEmail'
                         value={name}
                         onChange={(e) => onChange(e)}
                         required
-                        //   placeholder='with a placeholder'
                       />
                     </FormGroup>
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <label for='examplePassword'>Email</label>
+                      <label >Email</label>
                       <input
                         type='email'
                         name='email'
-                        id='examplePassword'
                         value={email}
                         onChange={(e) => onChange(e)}
                         required
-                        //   placeholder='password placeholder'
                       />
                     </FormGroup>
                   </Col>
@@ -85,12 +93,11 @@ const ContactVendor = () => {
                 <Row>
                   <Col md={12}>
                     <FormGroup>
-                      <label for='exampleText'>Message</label>
+                      <label >Message</label>
                       <input
                         type='textarea'
                         className='textarea'
                         name='message'
-                        // id='exampleText'
                         value={message}
                         onChange={(e) => onChange(e)}
                         required

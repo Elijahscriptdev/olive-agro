@@ -1,5 +1,7 @@
-import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
 import React, { useState } from "react";
+import axios from "axios";
+// import { useDispatch, useSelector } from "react-redux";
+import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
 
 const ContactAdmin = () => {
   const [show, setShow] = useState(false);
@@ -8,34 +10,54 @@ const ContactAdmin = () => {
   const handleShow = () => setShow(true);
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    document: null,
+    description: "",
   });
 
-  const { name, email, message } = formData;
+  const { document, description } = formData;
 
-  const resetForm = () => {
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
-  };
-
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    console.log("form submitted");
+  const handleFile = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.files,
+    });
+  };
 
-    // resetForm();
+  const onSubmit = async(e) => {
+    e.preventDefault();
+    console.log("test1", formData);
+    console.log("test2", formData.document[0]);
+
+    // const document = new FormData();
+    // document.append('document', formData.document[0]);
+    // console.log("doc", document);
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const document = formData.document[0];
+
+    const body = { document, description };
+    try {
+      const res = await axios.post(
+        "https://www.api.oliveagro.org/api/individual/upload/doc",
+        body,
+        config
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -53,31 +75,14 @@ const ContactAdmin = () => {
             <Col xs='12' md='6' className='m-auto'>
               <Form onSubmit={(e) => onSubmit(e)}>
                 <Row form>
-                  <Col md={6}>
+                  <Col md={12}>
                     <FormGroup>
-                      <label for='exampleEmail'>Name</label>
+                      <label>Document</label>
                       <input
-                        type='text'
-                        name='name'
-                        id='exampleEmail'
-                        value={name}
-                        onChange={(e) => onChange(e)}
+                        type='file'
+                        name='document'
+                        onChange={(e) => handleFile(e)}
                         required
-                        //   placeholder='with a placeholder'
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <label for='examplePassword'>Email</label>
-                      <input
-                        type='email'
-                        name='email'
-                        id='examplePassword'
-                        value={email}
-                        onChange={(e) => onChange(e)}
-                        required
-                        //   placeholder='password placeholder'
                       />
                     </FormGroup>
                   </Col>
@@ -85,14 +90,13 @@ const ContactAdmin = () => {
                 <Row>
                   <Col md={12}>
                     <FormGroup>
-                      <label for='exampleText'>Message</label>
+                      <label>Description</label>
                       <input
                         type='textarea'
                         className='textarea'
-                        name='message'
-                        // id='exampleText'
-                        value={message}
-                        onChange={(e) => onChange(e)}
+                        name='description'
+                        value={description}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                     </FormGroup>
