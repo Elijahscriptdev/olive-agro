@@ -15,59 +15,44 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
   const { pathname } = location;
   // let history = useHistory();
 
-  // Register
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    otherName: "",
-    companyName: "",
-    companyAddress: "",
-    email: "",
-    cac: null,
-    documentUrl: null,
-    type: "",
-    number: "",
-    password: "",
-    password2: "",
-  });
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [otherName, setOtherName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [cac, setCac] = useState(null);
+  const [documentUrl, setDocumentUrl] = useState(null);
+  const [type, setType] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [number, setNumber] = useState(0);
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
-  
-  const {
-    firstName,
-    lastName,
-    otherName,
-    companyName,
-    companyAddress,
-    email,
-    cac,
-    documentUrl,
-    type,
-    number,
-    password,
-    password2,
-  } = formData;
-
-  const handleInput = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const getCacUrl = async () => {
+    const image = new FormData();
+    image.append("image", cac);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(
+        "https://www.api.oliveagro.org/api/users/upload",
+        image,
+        config
+      );
+      console.log(res.data.image);
+      return res.data.image;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleFile = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.files,
-    });
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData.cac[0]);
-    // console.log(formData.documentUrl[0]);
-    const image = new FormData
-    image.append('image', formData.cac[0])
-    console.log("img", image)
+  const getDocUrl = async () => {
+    const image = new FormData();
+    image.append("image", documentUrl);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -80,16 +65,53 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
         image,
         config
       );
+      return res.data.image;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const cacImg = await getCacUrl();
+    const docImg = await getDocUrl();
+    console.log("new", cacImg);
+    console.log("new2", docImg);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = JSON.stringify({
+      firstName,
+      lastName,
+      otherName,
+      companyName,
+      companyAddress,
+      email,
+      cac: cacImg,
+      documentUrl: docImg,
+      type,
+      number,
+      phoneNumber,
+      password,
+    });
+
+    console.log("body", body);
+
+    try {
+      const res = await axios.post(
+        "https://www.api.oliveagro.org/api/users/create/merchant",
+        body,
+        config
+      );
       console.log(res);
     } catch (error) {
       console.log(error);
     }
-
-    
-    // register({ firstName, lastName, email, phoneNumber, password });
-    console.log("form submitted");
-    
-    // history.push('/login-register');
   };
 
   // redirect if login
@@ -104,7 +126,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
         <meta
           name='description'
           content='Compare page of flone react minimalist eCommerce template.'
-          />
+        />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
@@ -135,7 +157,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                       <Tab.Pane eventKey='login'>
                         <div className='login-form-container'>
                           <div className='login-register-form'>
-                            <form onSubmit={(e) => onSubmit(e)}>
+                            <form onSubmit={(e) => handleSubmit(e)}>
                               <label>First Name</label>
                               <input
                                 className='p'
@@ -143,9 +165,9 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={firstName}
                                 placeholder=''
                                 name='firstName'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setFirstName(e.target.value)}
                                 // required
-                                />
+                              />
                               <label>Last Name</label>
                               <input
                                 className='p'
@@ -153,9 +175,9 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={lastName}
                                 placeholder=''
                                 name='lastName'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setLastName(e.target.value)}
                                 // required
-                                />
+                              />
                               <label>Other Name</label>
                               <input
                                 className='p'
@@ -163,9 +185,9 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={otherName}
                                 placeholder=''
                                 name='otherName'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setOtherName(e.target.value)}
                                 // required
-                                />
+                              />
                               <label>Company Name</label>
                               <input
                                 className='p'
@@ -173,9 +195,9 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={companyName}
                                 placeholder=''
                                 name='companyName'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setCompanyName(e.target.value)}
                                 // required
-                                />
+                              />
                               <label>Company Address</label>
                               <input
                                 className='p'
@@ -183,25 +205,26 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={companyAddress}
                                 placeholder=''
                                 name='companyAddress'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) =>
+                                  setCompanyAddress(e.target.value)
+                                }
                                 // required
-                                />
+                              />
                               <label>Email address</label>
                               <input
                                 type='email'
                                 value={email}
                                 placeholder=''
                                 name='email'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setEmail(e.target.value)}
                                 // required
-                                />
+                              />
                               <label>CAC documents</label>
                               <input
                                 type='file'
-                                // value={cac}
                                 placeholder=''
                                 name='cac'
-                                onChange={(e) => handleFile(e)}
+                                onChange={(e) => setCac(e.target.files[0])}
                                 // required
                               />
                               <label>NIN</label>
@@ -210,47 +233,57 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={type}
                                 placeholder='NIN'
                                 name='type'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setType(e.target.value)}
                                 // required
-                                />
+                              />
                               <label>
                                 Directors ID, (drivers license, international
                                 passport, voters card)
                               </label>
                               <input
                                 type='file'
-                                // value={documentUrl}
                                 placeholder='Directors ID, (drivers license, international passport, voters card)'
                                 name='documentUrl'
-                                onChange={(e) => handleFile(e)}
+                                onChange={(e) =>
+                                  setDocumentUrl(e.target.files[0])
+                                }
                                 // required
                               />
 
-                              <label className='red'>Phone Number</label>
+                              <label className='red'>Number</label>
                               <input
                                 type='tel'
                                 value={number}
                                 placeholder='08012345678'
                                 name='number'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setNumber(e.target.value)}
                                 // required
-                                />
+                              />
+                              <label className='red'>Phone Number</label>
+                              <input
+                                type='tel'
+                                value={phoneNumber}
+                                placeholder='08012345678'
+                                name='phoneNumber'
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                // required
+                              />
                               <label>Password</label>
                               <input
                                 type='password'
                                 placeholder='************'
                                 value={password}
                                 name='password'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 // minLength='6'
-                                />
+                              />
                               <label>Confirm Password</label>
                               <input
                                 type='password'
                                 placeholder='************'
                                 value={password2}
                                 name='password2'
-                                onChange={(e) => handleInput(e)}
+                                onChange={(e) => setPassword2(e.target.value)}
                                 // minLength='6'
                               />
 
@@ -266,7 +299,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                       <Tab.Pane eventKey='register'>
                         <div className='login-form-container'>
                           <div className='login-register-form'>
-                            {/* <form onSubmit={(e) => onSubmit(e)}>
+                            <form onSubmit={(e) => handleSubmit(e)}>
                               <label>First Name</label>
                               <input
                                 className='p'
@@ -274,27 +307,27 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={firstName}
                                 placeholder=''
                                 name='firstName'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setFirstName(e.target.value)}
                                 // required
                               />
                               <label>Last Name</label>
                               <input
-                              className='p'
-                              type='text'
+                                className='p'
+                                type='text'
                                 value={lastName}
                                 placeholder=''
                                 name='lastName'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setLastName(e.target.value)}
                                 // required
                               />
                               <label>Other Name</label>
                               <input
-                              className='p'
+                                className='p'
                                 type='text'
                                 value={otherName}
                                 placeholder=''
                                 name='otherName'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setOtherName(e.target.value)}
                                 // required
                               />
                               <label>Company Name</label>
@@ -304,7 +337,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={companyName}
                                 placeholder=''
                                 name='companyName'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setCompanyName(e.target.value)}
                                 // required
                               />
                               <label>Company Address</label>
@@ -314,7 +347,9 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={companyAddress}
                                 placeholder=''
                                 name='companyAddress'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) =>
+                                  setCompanyAddress(e.target.value)
+                                }
                                 // required
                               />
                               <label>Email address</label>
@@ -323,47 +358,56 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={email}
                                 placeholder=''
                                 name='email'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setEmail(e.target.value)}
                                 // required
-                                />
+                              />
                               <label>CAC documents</label>
                               <input
-                              type='file'
-                                value={cac}
+                                type='file'
                                 placeholder=''
                                 name='cac'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setCac(e.target.files[0])}
                                 // required
                               />
                               <label>NIN</label>
                               <input
-                              type='text'
-                              value={type}
-                              placeholder='NIN'
-                              name='type'
-                                // onChange={(e) => onChange(e)}
+                                type='text'
+                                value={type}
+                                placeholder='NIN'
+                                name='type'
+                                onChange={(e) => setType(e.target.value)}
                                 // required
                               />
                               <label>
                                 Directors ID, (drivers license, international
-                                  passport, voters card)
+                                passport, voters card)
                               </label>
                               <input
-                              type='file'
-                                value={documentUrl}
+                                type='file'
                                 placeholder='Directors ID, (drivers license, international passport, voters card)'
                                 name='documentUrl'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) =>
+                                  setDocumentUrl(e.target.files[0])
+                                }
                                 // required
-                                />
-                                
-                                <label className='red'>Phone Number</label>
-                                <input
+                              />
+
+                              <label className='red'>Number</label>
+                              <input
                                 type='tel'
                                 value={number}
                                 placeholder='08012345678'
                                 name='number'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setNumber(e.target.value)}
+                                // required
+                              />
+                              <label className='red'>Phone Number</label>
+                              <input
+                                type='tel'
+                                value={phoneNumber}
+                                placeholder='08012345678'
+                                name='phoneNumber'
+                                onChange={(e) => setPhoneNumber(e.target.value)}
                                 // required
                               />
                               <label>Password</label>
@@ -372,25 +416,25 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder='************'
                                 value={password}
                                 name='password'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 // minLength='6'
-                                />
+                              />
                               <label>Confirm Password</label>
                               <input
                                 type='password'
                                 placeholder='************'
                                 value={password2}
                                 name='password2'
-                                // onChange={(e) => onChange(e)}
+                                onChange={(e) => setPassword2(e.target.value)}
                                 // minLength='6'
-                                />
+                              />
 
-                                <div className='button-box'>
+                              <div className='button-box'>
                                 <button type='submit'>
                                   <span>Register</span>
-                                  </button>
+                                </button>
                               </div>
-                            </form> */}
+                            </form>
                           </div>
                         </div>
                       </Tab.Pane>
