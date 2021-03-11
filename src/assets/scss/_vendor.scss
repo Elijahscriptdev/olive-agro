@@ -56,11 +56,10 @@ input[type="file"] {
 }
 
 .increase-col-height {
- margin: 30px 0;
+  margin: 30px 0;
   img {
     height: 350px !important;
   }
-  
 }
 
 .product-details {
@@ -68,7 +67,7 @@ input[type="file"] {
 
   .available {
     padding: 3px;
-    background: #0E9146;
+    background: #0e9146;
     color: #fff;
   }
 }
@@ -88,7 +87,7 @@ input[type="file"] {
   }
 
   .product-detail-btn:hover {
-    background: #0E9146;
+    background: #0e9146;
   }
 }
 
@@ -99,4 +98,21 @@ input[type="file"] {
 
 .textarea {
   height: 130px;
+}
+
+.success-message {
+  margin: 30px auto;
+  width: 400px;
+  text-align: center;
+
+  img {
+    width: 350px;
+  }
+
+  a {
+    margin: 0 5px;
+    background-color: #404040;
+    color: #fff;
+    padding: 8px 10px;
+  }
 }

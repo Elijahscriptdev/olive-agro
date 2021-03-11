@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
 import axios from "axios";
-// import { Link, Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
@@ -11,9 +11,8 @@ import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { login, register } from "../../redux/actions/auth";
 
-const VendorRegister = ({ location, register, login, isAuthenticated }) => {
+const VendorRegister = ({ location }) => {
   const { pathname } = location;
-  // let history = useHistory();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -43,7 +42,6 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
         image,
         config
       );
-      console.log(res.data.image);
       return res.data.image;
     } catch (error) {
       console.log(error);
@@ -73,11 +71,8 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const cacImg = await getCacUrl();
     const docImg = await getDocUrl();
-    console.log("new", cacImg);
-    console.log("new2", docImg);
 
     const config = {
       headers: {
@@ -100,24 +95,17 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
       password,
     });
 
-    console.log("body", body);
-
     try {
       const res = await axios.post(
         "https://www.api.oliveagro.org/api/users/create/merchant",
         body,
         config
       );
-      console.log(res);
+      window.open('https://admin.oliveagro.org/registration-completed');
     } catch (error) {
       console.log(error);
     }
   };
-
-  // redirect if login
-  // if (isAuthenticated) {
-  //   return <Redirect to='/' />;
-  // }
 
   return (
     <Fragment>
@@ -133,7 +121,6 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
         Vendor Register
       </BreadcrumbsItem>
       <LayoutOne headerTop='visible'>
-        {/* breadcrumb */}
         <Breadcrumb />
         <div className='login-register-area pt-100 pb-100'>
           <div className='container'>
@@ -166,7 +153,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder=''
                                 name='firstName'
                                 onChange={(e) => setFirstName(e.target.value)}
-                                // required
+                                required
                               />
                               <label>Last Name</label>
                               <input
@@ -176,7 +163,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder=''
                                 name='lastName'
                                 onChange={(e) => setLastName(e.target.value)}
-                                // required
+                                required
                               />
                               <label>Other Name</label>
                               <input
@@ -186,7 +173,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder=''
                                 name='otherName'
                                 onChange={(e) => setOtherName(e.target.value)}
-                                // required
+                                required
                               />
                               <label>Company Name</label>
                               <input
@@ -196,7 +183,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder=''
                                 name='companyName'
                                 onChange={(e) => setCompanyName(e.target.value)}
-                                // required
+                                required
                               />
                               <label>Company Address</label>
                               <input
@@ -208,7 +195,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 onChange={(e) =>
                                   setCompanyAddress(e.target.value)
                                 }
-                                // required
+                                required
                               />
                               <label>Email address</label>
                               <input
@@ -217,7 +204,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder=''
                                 name='email'
                                 onChange={(e) => setEmail(e.target.value)}
-                                // required
+                                required
                               />
                               <label>CAC documents</label>
                               <input
@@ -225,7 +212,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder=''
                                 name='cac'
                                 onChange={(e) => setCac(e.target.files[0])}
-                                // required
+                                required
                               />
                               <label>NIN</label>
                               <input
@@ -234,7 +221,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder='NIN'
                                 name='type'
                                 onChange={(e) => setType(e.target.value)}
-                                // required
+                                required
                               />
                               <label>
                                 Directors ID, (drivers license, international
@@ -247,7 +234,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 onChange={(e) =>
                                   setDocumentUrl(e.target.files[0])
                                 }
-                                // required
+                                required
                               />
 
                               <label className='red'>Number</label>
@@ -257,7 +244,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder='08012345678'
                                 name='number'
                                 onChange={(e) => setNumber(e.target.value)}
-                                // required
+                                required
                               />
                               <label className='red'>Phone Number</label>
                               <input
@@ -266,17 +253,18 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder='08012345678'
                                 name='phoneNumber'
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                                // required
+                                required
                               />
-                              <label>Password</label>
+                              <label><span>Password must contain a number and a letter</span></label>
                               <input
                                 type='password'
                                 placeholder='************'
                                 value={password}
                                 name='password'
                                 onChange={(e) => setPassword(e.target.value)}
-                                // minLength='6'
+                                minLength='6'
                               />
+                              
                               <label>Confirm Password</label>
                               <input
                                 type='password'
@@ -284,7 +272,7 @@ const VendorRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={password2}
                                 name='password2'
                                 onChange={(e) => setPassword2(e.target.value)}
-                                // minLength='6'
+                                minLength='6'
                               />
 
                               <div className='button-box'>
@@ -462,21 +450,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { login, register })(VendorRegister);
-
-// const cacFile = () => {
-// const info = JSON.parse(localStorage.getItem("Data"));
-// const image = info.cac;
-//   return axios.post('https://www.api.oliveagro.org/api/users/upload', image);
-// }
-
-// const docFile = () => {
-// const info = JSON.parse(localStorage.getItem("Data"));
-// const image = info.documentUrl;
-//   return axios.post('https://www.api.oliveagro.org/api/users/upload', image);
-// }
-
-// Promise.all([cacFile(), docFile()])
-//   .then(function (results) {
-//     const cacUrl = results[0];
-//     const docUrl = results[1];
-//   });
