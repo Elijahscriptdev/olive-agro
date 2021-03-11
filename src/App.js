@@ -76,7 +76,7 @@ const ShopListFullWidth = lazy(() => import("./pages/shop/ShopListFullWidth"));
 const ShopListTwoColumn = lazy(() => import("./pages/shop/ShopListTwoColumn"));
 
 // product pages
-const Product = lazy(() => import("./pages/shop-product/Product"));
+// const Product = lazy(() => import("./pages/shop-product/Product"));
 const ProductTabLeft = lazy(() =>
   import("./pages/shop-product/ProductTabLeft")
 );
@@ -471,7 +471,7 @@ const App = (props) => {
                   component={NotFound}
                 />
 
-                {/* <Route exact component={NotFound} /> */}
+                <Route exact component={NotFound} />
               </Switch>
             </Suspense>
           </ScrollToTop>
