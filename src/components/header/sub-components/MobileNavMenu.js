@@ -224,7 +224,7 @@ const MobileNavMenu = ({ strings }) => {
           </ul> */}
         </li>
 
-        <li className="menu-item-has-children">
+        {/* <li className="menu-item-has-children">
           <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
             {strings["shop"]}
           </Link>
@@ -336,7 +336,7 @@ const MobileNavMenu = ({ strings }) => {
               </ul>
             </li>
           </ul>
-        </li>
+        </li> */}
         {/* <li>
           <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
             {strings["collection"]}
@@ -365,11 +365,11 @@ const MobileNavMenu = ({ strings }) => {
                 {strings["compare"]}
               </Link>
             </li> */}
-            <li>
+            {/* <li>
               <Link to={process.env.PUBLIC_URL + "/my-account"}>
                 {strings["my_account"]}
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to={process.env.PUBLIC_URL + "/login-register"}>
                 {strings["login_register"]}
