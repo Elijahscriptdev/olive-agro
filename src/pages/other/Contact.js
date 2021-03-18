@@ -40,27 +40,27 @@ const Contact = ({ location }) => {
     console.log(formData);
     console.log("form submitted");
 
-    var SERVICE_ID = "service_qdlw33x";
-    var TEMPLATE_ID = "template_xc2y67d";
-    var USER_ID = "user_4JEblKGUlOUD74wFkexDE";
+    // var SERVICE_ID = "service_qdlw33x";
+    // var TEMPLATE_ID = "template_xc2y67d";
+    // var USER_ID = "user_4JEblKGUlOUD74wFkexDE";
 
-    let templateParams = {
-      from_name: email,
-      to_name: "elijahobominuru@gmail.com",
-      subject: subject,
-      message_html: message,
-    };
+    // let templateParams = {
+    //   from_name: email,
+    //   to_name: "elijahobominuru@gmail.com",
+    //   subject: subject,
+    //   message_html: message,
+    // };
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
-      function (response) {
-        console.log(response.status, response.text);
-      },
-      function (err) {
-        console.log(err);
-      }
-    );
+    // emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
+    //   function (response) {
+    //     console.log(response.status, response.text);
+    //   },
+    //   function (err) {
+    //     console.log(err);
+    //   }
+    // );
 
-    resetForm();
+    // resetForm();
   };
 
   return (

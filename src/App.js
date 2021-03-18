@@ -7,7 +7,6 @@ import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
 
-
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeFashion"));
 const HomeFashionTwo = lazy(() => import("./pages/home/HomeFashionTwo"));
@@ -108,8 +107,12 @@ const AllProducts = lazy(() => import("./pages/other/AllProducts"));
 const AllCategories = lazy(() => import("./pages/other/AllCategories"));
 const SubCategories = lazy(() => import("./pages/other/SubCategories"));
 const SingleProduct = lazy(() => import("./pages/other/SingleProduct"));
-const DisplayProductsFromSub = lazy(() => import("./pages/other/DisplayProductsFromSub"));
+const DisplayProductsFromSub = lazy(() =>
+  import("./pages/other/DisplayProductsFromSub")
+);
 const SuccessMessage = lazy(() => import("./pages/other/SuccessMessage"));
+const ForgotPassword = lazy(() => import("./pages/other/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/other/ResetPassword"));
 
 const Cart = lazy(() => import("./pages/other/Cart"));
 const Wishlist = lazy(() => import("./pages/other/Wishlist"));
@@ -447,6 +450,16 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/registration-completed"}
                   component={SuccessMessage}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/forgot-password"}
+                  component={ForgotPassword}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/reset-password"}
+                  component={ResetPassword}
                 />
 
                 <Route

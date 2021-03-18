@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
 import axios from "axios";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
@@ -11,8 +11,24 @@ import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { login, register } from "../../redux/actions/auth";
 
+const options = [
+  {
+    label: "DRIVER'S LINCENSE",
+    value: "DRIVER'S LINCENSE",
+  },
+  {
+    label: "VOTER's CARD",
+    value: "VOTER's CARD",
+  },
+  {
+    label: "INTERNATIONAL PASSPORT",
+    value: "INTERNATIONAL PASSPORT",
+  },
+];
+
 const VendorRegister = ({ location }) => {
   const { pathname } = location;
+  let history = useHistory();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,9 +37,10 @@ const VendorRegister = ({ location }) => {
   const [companyAddress, setCompanyAddress] = useState("");
   const [email, setEmail] = useState("");
   const [cac, setCac] = useState(null);
-  const [documentUrl, setDocumentUrl] = useState(null);
-  const [type, setType] = useState("");
+  const [RC_number, setRC_number] = useState(0);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [documentUrl, setDocumentUrl] = useState(null);
+  const [IDtype, setIDtype] = useState("");
   const [number, setNumber] = useState(0);
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -69,7 +86,7 @@ const VendorRegister = ({ location }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmitBusiness = async (e) => {
     e.preventDefault();
     const cacImg = await getCacUrl();
     const docImg = await getDocUrl();
@@ -87,21 +104,57 @@ const VendorRegister = ({ location }) => {
       companyName,
       companyAddress,
       email,
-      cac: cacImg,
-      documentUrl: docImg,
-      type,
-      number,
+      cac: [cacImg],
+      RC_number,
       phoneNumber,
+      IDtype,
+      number,
+      documentUrl: docImg,
+      password,
+    });
+    console.log(body);
+
+    try {
+      const res = await axios.post(
+        "https://www.api.oliveagro.org/api/users/create/merchant/business",
+        body,
+        config
+      );
+      history.push("/registration-completed");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmitIndividual = async (e) => {
+    e.preventDefault();
+    const docImg = await getDocUrl();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = JSON.stringify({
+      firstName,
+      lastName,
+      otherName,
+      email,
+      phoneNumber,
+      IDtype,
+      number,
+      documentUrl: docImg,
       password,
     });
 
     try {
       const res = await axios.post(
-        "https://www.api.oliveagro.org/api/users/create/merchant",
+        "https://www.api.oliveagro.org/api/users/create/merchant/individual",
         body,
         config
       );
-      window.open('https://admin.oliveagro.org/registration-completed');
+      history.push("/registration-completed");
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +197,7 @@ const VendorRegister = ({ location }) => {
                       <Tab.Pane eventKey='login'>
                         <div className='login-form-container'>
                           <div className='login-register-form'>
-                            <form onSubmit={(e) => handleSubmit(e)}>
+                            <form onSubmit={(e) => handleSubmitBusiness(e)}>
                               <label>First Name</label>
                               <input
                                 className='p'
@@ -214,22 +267,45 @@ const VendorRegister = ({ location }) => {
                                 onChange={(e) => setCac(e.target.files[0])}
                                 required
                               />
-                              <label>NIN</label>
+                              <label>RC Number</label>
                               <input
                                 type='text'
-                                value={type}
-                                placeholder='NIN'
-                                name='type'
-                                onChange={(e) => setType(e.target.value)}
+                                value={RC_number}
+                                placeholder=''
+                                name='RC_number'
+                                onChange={(e) => setRC_number(e.target.value)}
+                                required
+                              />
+                              <label className='red'>Phone Number</label>
+                              <input
+                                type='tel'
+                                value={phoneNumber}
+                                placeholder='08012345678'
+                                name='phoneNumber'
+                                onChange={(e) => setPhoneNumber(e.target.value)}
                                 required
                               />
                               <label>
-                                Directors ID, (drivers license, international
+                                Select ID, (drivers license, international
                                 passport, voters card)
                               </label>
+                              <select
+                                className='select'
+                                value={IDtype}
+                                onChange={(e) => setIDtype(e.target.value)}
+                              >
+                                {options.map((option, index) => (
+                                  <option key={index} value={option.value}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                              <br />
+                              <br />
+                              <label>UPLOAD ID</label>
                               <input
                                 type='file'
-                                placeholder='Directors ID, (drivers license, international passport, voters card)'
+                                placeholder=''
                                 name='documentUrl'
                                 onChange={(e) =>
                                   setDocumentUrl(e.target.files[0])
@@ -246,16 +322,11 @@ const VendorRegister = ({ location }) => {
                                 onChange={(e) => setNumber(e.target.value)}
                                 required
                               />
-                              <label className='red'>Phone Number</label>
-                              <input
-                                type='tel'
-                                value={phoneNumber}
-                                placeholder='08012345678'
-                                name='phoneNumber'
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                                required
-                              />
-                              <label><span>Password must contain a number and a letter</span></label>
+                              <label>
+                                <span>
+                                  Password must contain a number and a letter
+                                </span>
+                              </label>
                               <input
                                 type='password'
                                 placeholder='************'
@@ -264,7 +335,7 @@ const VendorRegister = ({ location }) => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 minLength='6'
                               />
-                              
+
                               <label>Confirm Password</label>
                               <input
                                 type='password'
@@ -287,7 +358,7 @@ const VendorRegister = ({ location }) => {
                       <Tab.Pane eventKey='register'>
                         <div className='login-form-container'>
                           <div className='login-register-form'>
-                            <form onSubmit={(e) => handleSubmit(e)}>
+                            <form onSubmit={(e) => handleSubmitIndividual(e)}>
                               <label>First Name</label>
                               <input
                                 className='p'
@@ -296,7 +367,7 @@ const VendorRegister = ({ location }) => {
                                 placeholder=''
                                 name='firstName'
                                 onChange={(e) => setFirstName(e.target.value)}
-                                // required
+                                required
                               />
                               <label>Last Name</label>
                               <input
@@ -306,7 +377,7 @@ const VendorRegister = ({ location }) => {
                                 placeholder=''
                                 name='lastName'
                                 onChange={(e) => setLastName(e.target.value)}
-                                // required
+                                required
                               />
                               <label>Other Name</label>
                               <input
@@ -316,29 +387,7 @@ const VendorRegister = ({ location }) => {
                                 placeholder=''
                                 name='otherName'
                                 onChange={(e) => setOtherName(e.target.value)}
-                                // required
-                              />
-                              <label>Company Name</label>
-                              <input
-                                className='p'
-                                type='text'
-                                value={companyName}
-                                placeholder=''
-                                name='companyName'
-                                onChange={(e) => setCompanyName(e.target.value)}
-                                // required
-                              />
-                              <label>Company Address</label>
-                              <input
-                                className='p'
-                                type='text'
-                                value={companyAddress}
-                                placeholder=''
-                                name='companyAddress'
-                                onChange={(e) =>
-                                  setCompanyAddress(e.target.value)
-                                }
-                                // required
+                                required
                               />
                               <label>Email address</label>
                               <input
@@ -347,37 +396,43 @@ const VendorRegister = ({ location }) => {
                                 placeholder=''
                                 name='email'
                                 onChange={(e) => setEmail(e.target.value)}
-                                // required
+                                required
                               />
-                              <label>CAC documents</label>
+                              <label className='red'>Phone Number</label>
+                              <input
+                                type='tel'
+                                value={phoneNumber}
+                                placeholder='08012345678'
+                                name='phoneNumber'
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                required
+                              />
+                              <label>
+                                Select ID, (drivers license, international
+                                passport, voters card)
+                              </label>
+                              <select
+                                className='select'
+                                value={IDtype}
+                                onChange={(e) => setIDtype(e.target.value)}
+                              >
+                                {options.map((option, index) => (
+                                  <option key={index} value={option.value}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                              <br />
+                              <br />
+                              <label>UPLOAD ID</label>
                               <input
                                 type='file'
                                 placeholder=''
-                                name='cac'
-                                onChange={(e) => setCac(e.target.files[0])}
-                                // required
-                              />
-                              <label>NIN</label>
-                              <input
-                                type='text'
-                                value={type}
-                                placeholder='NIN'
-                                name='type'
-                                onChange={(e) => setType(e.target.value)}
-                                // required
-                              />
-                              <label>
-                                Directors ID, (drivers license, international
-                                passport, voters card)
-                              </label>
-                              <input
-                                type='file'
-                                placeholder='Directors ID, (drivers license, international passport, voters card)'
                                 name='documentUrl'
                                 onChange={(e) =>
                                   setDocumentUrl(e.target.files[0])
                                 }
-                                // required
+                                required
                               />
 
                               <label className='red'>Number</label>
@@ -387,26 +442,22 @@ const VendorRegister = ({ location }) => {
                                 placeholder='08012345678'
                                 name='number'
                                 onChange={(e) => setNumber(e.target.value)}
-                                // required
+                                required
                               />
-                              <label className='red'>Phone Number</label>
-                              <input
-                                type='tel'
-                                value={phoneNumber}
-                                placeholder='08012345678'
-                                name='phoneNumber'
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                                // required
-                              />
-                              <label>Password</label>
+                              <label>
+                                <span>
+                                  Password must contain a number and a letter
+                                </span>
+                              </label>
                               <input
                                 type='password'
                                 placeholder='************'
                                 value={password}
                                 name='password'
                                 onChange={(e) => setPassword(e.target.value)}
-                                // minLength='6'
+                                minLength='6'
                               />
+
                               <label>Confirm Password</label>
                               <input
                                 type='password'
@@ -414,7 +465,7 @@ const VendorRegister = ({ location }) => {
                                 value={password2}
                                 name='password2'
                                 onChange={(e) => setPassword2(e.target.value)}
-                                // minLength='6'
+                                minLength='6'
                               />
 
                               <div className='button-box'>

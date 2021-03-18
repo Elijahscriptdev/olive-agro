@@ -116,3 +116,18 @@ input[type="file"] {
     padding: 8px 10px;
   }
 }
+
+.select {
+  font-size: 14px;
+  width: 100%;
+  color: #333;
+  border: 1px solid #eceff8;
+  padding: 10px 10px;
+  box-shadow: none;
+}
+
+.forgot {
+  input {
+    width: 40%;
+  }
+}
