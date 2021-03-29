@@ -72,7 +72,7 @@ export const register = ({
     dispatch(loadUser());
   } catch (error) {
     // dispatch(setAlert(error.response.data.errors, "danger"));
-    console.log(error.response);
+    console.log("error", error.response);
     dispatch({
       type: REGISTER_FAIL,
     });
@@ -102,7 +102,7 @@ export const login = ({ email, password }) => async (dispatch) => {
     // }
     dispatch(loadUser());
   } catch (error) {
-    console.log(error.response.data.errors);
+    console.log("error", error);
     dispatch({
       type: LOGIN_FAIL,
     });

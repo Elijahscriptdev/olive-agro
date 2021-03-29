@@ -16,11 +16,11 @@ const ForgotPassword = ({ location }) => {
 
   const { newPassword } = formData;
 
-  const resetForm = () => {
-    setFormData({
-      newPassword: "",
-    });
-  };
+  // const resetForm = () => {
+  //   setFormData({
+  //     newPassword: "",
+  //   });
+  // };
 
   const onChange = (e) => {
     setFormData({

@@ -40,11 +40,11 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
     });
   };
 
-  const onSubmit = (e) => {
+  const handleResgister = (e) => {
     e.preventDefault();
     register({ firstName, lastName, email, phoneNumber, password });
-    console.log(formData);
-    console.log("form submitted");
+    // console.log(formData);
+    // console.log("form submitted");
     history.push('/login-register');
   };
 
@@ -56,7 +56,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
       [e.target.name]: e.target.value,
     });
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     login({ email, password });
   };
@@ -104,14 +104,14 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                       <Tab.Pane eventKey='login'>
                         <div className='login-form-container'>
                           <div className='login-register-form'>
-                            <form onSubmit={(e) => handleSubmit(e)}>
+                            <form onSubmit={(e) => handleLogin(e)}>
                               <input
                                 type='email'
                                 value={email}
                                 placeholder='eee@gmail.com'
                                 name='email'
                                 onChange={(e) => handleChange(e)}
-                                // required
+                                required
                               />
                               <input
                                 type='password'
@@ -119,7 +119,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={password}
                                 name='password'
                                 onChange={(e) => handleChange(e)}
-                                // minLength='6'
+                                minLength='6'
                               />
                               <div className='button-box'>
                                 <div className='login-toggle-btn'>
@@ -140,7 +140,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                       <Tab.Pane eventKey='register'>
                         <div className='login-form-container'>
                           <div className='login-register-form'>
-                            <form onSubmit={(e) => onSubmit(e)}>
+                            <form onSubmit={(e) => handleResgister(e)}>
                               <input
                                 className='p'
                                 type='text'
@@ -157,7 +157,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder='Last Name'
                                 name='lastName'
                                 onChange={(e) => onChange(e)}
-                                // required
+                                required
                               />
                               <input
                                 type='email'
@@ -165,7 +165,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder='eee@gmail.com'
                                 name='email'
                                 onChange={(e) => onChange(e)}
-                                // required
+                                required
                               />
                               <input
                                 type='tel'
@@ -173,7 +173,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 placeholder='08012345678'
                                 name='phoneNumber'
                                 onChange={(e) => onChange(e)}
-                                // required
+                                required
                               />
                               <input
                                 type='password'
@@ -181,7 +181,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={password}
                                 name='password'
                                 onChange={(e) => onChange(e)}
-                                // minLength='6'
+                                minLength='6'
                               />
                               <input
                                 type='password'
@@ -189,7 +189,7 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 value={password2}
                                 name='password2'
                                 onChange={(e) => onChange(e)}
-                                // minLength='6'
+                                minLength='6'
                               />
 
                               <div className='button-box'>

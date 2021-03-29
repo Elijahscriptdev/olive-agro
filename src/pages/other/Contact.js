@@ -5,7 +5,7 @@ import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 // import LocationMap from "../../components/contact/LocationMap";
-import * as emailjs from "emailjs-com";
+// import * as emailjs from "emailjs-com";
 
 const Contact = ({ location }) => {
   const { pathname } = location;
@@ -37,8 +37,8 @@ const Contact = ({ location }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    console.log("form submitted");
+    // console.log(formData);
+    // console.log("form submitted");
 
     // var SERVICE_ID = "service_qdlw33x";
     // var TEMPLATE_ID = "template_xc2y67d";
@@ -60,7 +60,7 @@ const Contact = ({ location }) => {
     //   }
     // );
 
-    // resetForm();
+    resetForm();
   };
 
   return (
