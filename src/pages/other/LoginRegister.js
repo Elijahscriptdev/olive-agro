@@ -10,6 +10,7 @@ import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { login, register } from "../../redux/actions/auth";
 import { setAlert } from "../../redux/actions/alert";
+import Alert from "./Alert";
 
 const LoginRegister = ({
   location,
@@ -70,7 +71,9 @@ const LoginRegister = ({
   const handleLogin = (e) => {
     e.preventDefault();
     login({ email, password });
-    setAlert("Logged in successful", "success");
+    isAuthenticated
+      ? setAlert("Logged in successful", "success")
+      : setAlert("Incorrect email or password", "danger");
   };
 
   // redirect if login
@@ -87,10 +90,10 @@ const LoginRegister = ({
           content='Compare page of flone react minimalist eCommerce template.'
         />
       </MetaTags>
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
+      {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Login Register
-      </BreadcrumbsItem>
+      </BreadcrumbsItem> */}
       <LayoutOne headerTop='visible'>
         {/* breadcrumb */}
         <Breadcrumb />
@@ -99,6 +102,7 @@ const LoginRegister = ({
             <div className='row'>
               <div className='col-lg-7 col-md-12 ml-auto mr-auto'>
                 <div className='login-register-wrapper'>
+                  <Alert />
                   <Tab.Container defaultActiveKey='login'>
                     <Nav variant='pills' className='login-register-tab-list'>
                       <Nav.Item>

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 // import MenuCart from "./sub-components/MenuCart";
 import { deleteFromCart } from "../../redux/actions/cartActions";
+import { logout } from "../../redux/actions/auth";
+import { setAlert } from "../../redux/actions/alert";
 
 const IconGroup = ({
   currency,
@@ -11,9 +13,17 @@ const IconGroup = ({
   wishlistData,
   compareData,
   deleteFromCart,
-  iconWhiteClass
+  iconWhiteClass,
+  auth: { isAuthenticated },
+  logout,
+  setAlert,
 }) => {
-  const handleClick = e => {
+  const LogOut = (e) => {
+    e.preventDefault();
+    setAlert("You have successfully logged out", "danger");
+  };
+
+  const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
 
@@ -28,36 +38,56 @@ const IconGroup = ({
     <div
       className={`header-right-wrap ${iconWhiteClass ? iconWhiteClass : ""}`}
     >
-      <div className="same-style header-search d-none d-lg-block">
-        <button className="search-active" onClick={e => handleClick(e)}>
-          <i className="pe-7s-search" />
+      <div className='same-style header-search d-none d-lg-block'>
+        <button className='search-active' onClick={(e) => handleClick(e)}>
+          <i className='pe-7s-search' />
         </button>
-        <div className="search-content">
-          <form action="#">
-            <input type="text" placeholder="Search" />
-            <button className="button-search">
-              <i className="pe-7s-search" />
+        <div className='search-content'>
+          <form action='#'>
+            <input type='text' placeholder='Search' />
+            <button className='button-search'>
+              <i className='pe-7s-search' />
             </button>
           </form>
         </div>
       </div>
-      <div className="same-style account-setting d-none d-lg-block">
+      <div className='same-style account-setting d-none d-lg-block'>
         <button
-          className="account-setting-active"
-          onClick={e => handleClick(e)}
+          className='account-setting-active'
+          onClick={(e) => handleClick(e)}
         >
-          <i className="pe-7s-user-female" />
+          <i className='pe-7s-user-female' />
         </button>
-        <div className="account-dropdown">
+        <div className='account-dropdown'>
           <ul>
-            <li>
+            {isAuthenticated ? (
+              <li onClick={LogOut}>
+                <Link to='/' onClick={logout}>
+                  Logout
+                </Link>
+              </li>
+            ) : (
+              <ul>
+                <li>
+                  <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                    Register
+                  </Link>
+                </li>
+              </ul>
+            )}
+            {/* <li>
               <Link to={process.env.PUBLIC_URL + "/login-register"}>Login</Link>
             </li>
             <li>
               <Link to={process.env.PUBLIC_URL + "/login-register"}>
                 Register
               </Link>
-            </li>
+            </li> */}
             {/* <li>
               <Link to={process.env.PUBLIC_URL + "/my-account"}>
                 my account
@@ -104,12 +134,12 @@ const IconGroup = ({
           </span>
         </Link>
       </div> */}
-      <div className="same-style mobile-off-canvas d-block d-lg-none">
+      <div className='same-style mobile-off-canvas d-block d-lg-none'>
         <button
-          className="mobile-aside-button"
+          className='mobile-aside-button'
           onClick={() => triggerMobileMenu()}
         >
-          <i className="pe-7s-menu" />
+          <i className='pe-7s-menu' />
         </button>
       </div>
     </div>
@@ -122,24 +152,31 @@ IconGroup.propTypes = {
   currency: PropTypes.object,
   iconWhiteClass: PropTypes.string,
   deleteFromCart: PropTypes.func,
-  wishlistData: PropTypes.array
+  wishlistData: PropTypes.array,
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => {
-  return {
-    currency: state.currencyData,
-    cartData: state.cartData,
-    wishlistData: state.wishlistData,
-    compareData: state.compareData
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     currency: state.currencyData,
+//     cartData: state.cartData,
+//     wishlistData: state.wishlistData,
+//     compareData: state.compareData
+//   };
+// };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteFromCart: (item, addToast) => {
-      dispatch(deleteFromCart(item, addToast));
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     deleteFromCart: (item, addToast) => {
+//       dispatch(deleteFromCart(item, addToast));
+//     }
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(IconGroup);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout, setAlert })(IconGroup);
