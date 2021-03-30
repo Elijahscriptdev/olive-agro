@@ -8,6 +8,7 @@ import singleProductsReducer from "./singleProductsReducer";
 import categoriesReducer from "./categoriesReducer";
 import subCategoriesReducer from "./subCategoriesReducer";
 import auth from "./auth";
+import alert from "./alert";
 import { combineReducers } from "redux";
 import { createMultilanguageReducer } from "redux-multilanguage";
 import productsReducerCat from "./productsReducerCat";
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   categoryList: categoriesReducer,
   subCategoryList: subCategoriesReducer,
   productListCat: productsReducerCat,
+  alert,
   // contactAdminVendor: contactAdminVendorReducer,
 });
 

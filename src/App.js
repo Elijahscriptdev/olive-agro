@@ -6,6 +6,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
+import Alert from "./pages/other/Alert";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeFashion"));
@@ -149,6 +150,7 @@ const App = (props) => {
                 </div>
               }
             >
+              <Alert />
               <Switch>
                 <Route
                   exact

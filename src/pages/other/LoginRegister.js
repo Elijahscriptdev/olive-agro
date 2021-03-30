@@ -9,8 +9,15 @@ import Nav from "react-bootstrap/Nav";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { login, register } from "../../redux/actions/auth";
+import { setAlert } from "../../redux/actions/alert";
 
-const LoginRegister = ({ location, register, login, isAuthenticated }) => {
+const LoginRegister = ({
+  location,
+  register,
+  login,
+  isAuthenticated,
+  setAlert,
+}) => {
   const { pathname } = location;
   let history = useHistory();
 
@@ -42,10 +49,14 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
 
   const handleResgister = (e) => {
     e.preventDefault();
-    register({ firstName, lastName, email, phoneNumber, password });
+    if (password !== password2) {
+      setAlert("Passwords dont match", "danger");
+    } else {
+      register({ firstName, lastName, email, phoneNumber, password });
+    }
     // console.log(formData);
     // console.log("form submitted");
-    history.push('/login-register');
+    history.push("/login-register");
   };
 
   // login
@@ -125,7 +136,11 @@ const LoginRegister = ({ location, register, login, isAuthenticated }) => {
                                 <div className='login-toggle-btn'>
                                   <input type='checkbox' />
                                   <label className='ml-10'>Remember me</label>
-                                  <Link to={process.env.PUBLIC_URL + "/reset-password"}>
+                                  <Link
+                                    to={
+                                      process.env.PUBLIC_URL + "/reset-password"
+                                    }
+                                  >
                                     Forgot Password?
                                   </Link>
                                 </div>
@@ -218,10 +233,13 @@ LoginRegister.propTypes = {
   register: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { login, register })(LoginRegister);
+export default connect(mapStateToProps, { login, register, setAlert })(
+  LoginRegister
+);
