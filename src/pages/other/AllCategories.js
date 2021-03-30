@@ -39,9 +39,7 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
                     }`}
                   >
                     <div className='product-img'>
-                      <Link 
-                      to={`/from-cat?${category._id}`}
-                      >
+                      <Link to={`/from-cat?${category._id}`}>
                         <img
                           className='default-img mt-4'
                           src={category.imageUrl}

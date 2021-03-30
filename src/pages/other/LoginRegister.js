@@ -70,6 +70,7 @@ const LoginRegister = ({
   const handleLogin = (e) => {
     e.preventDefault();
     login({ email, password });
+    setAlert("Logged in successful", "success");
   };
 
   // redirect if login
@@ -197,6 +198,7 @@ const LoginRegister = ({
                                 name='password'
                                 onChange={(e) => onChange(e)}
                                 minLength='6'
+                                required
                               />
                               <input
                                 type='password'
@@ -205,6 +207,7 @@ const LoginRegister = ({
                                 name='password2'
                                 onChange={(e) => onChange(e)}
                                 minLength='6'
+                                required
                               />
 
                               <div className='button-box'>

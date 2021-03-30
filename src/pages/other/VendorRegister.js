@@ -10,6 +10,8 @@ import Nav from "react-bootstrap/Nav";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { login, register } from "../../redux/actions/auth";
+import { setAlert } from "../../redux/actions/alert";
+import Alert from "./Alert";
 
 const options = [
   {
@@ -26,7 +28,7 @@ const options = [
   },
 ];
 
-const VendorRegister = ({ location }) => {
+const VendorRegister = ({ location, setAlert }) => {
   const { pathname } = location;
   let history = useHistory();
 
@@ -88,6 +90,9 @@ const VendorRegister = ({ location }) => {
 
   const handleSubmitBusiness = async (e) => {
     e.preventDefault();
+    if (password !== password2) {
+      setAlert("Passwords dont match", "danger");
+    }
     const cacImg = await getCacUrl();
     const docImg = await getDocUrl();
 
@@ -480,6 +485,7 @@ const VendorRegister = ({ location }) => {
                     </Tab.Content>
                   </Tab.Container>
                 </div>
+                <Alert />
               </div>
             </div>
           </div>
@@ -494,10 +500,13 @@ VendorRegister.propTypes = {
   register: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { login, register })(VendorRegister);
+export default connect(mapStateToProps, { login, register, setAlert })(
+  VendorRegister
+);

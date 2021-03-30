@@ -1,14 +1,23 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
-import { multilanguage } from "redux-multilanguage";
+import { connect } from "react-redux";
+// import PropTypes from "prop-types";
+import { logout } from "../../../redux/actions/auth";
+// import { multilanguage } from "redux-multilanguage";
+import { setAlert } from "../../../redux/actions/alert";
 
-const MobileNavMenu = ({ strings }) => {
+const MobileNavMenu = ({ auth: { isAuthenticated }, logout, setAlert }) => {
+  const LogOut = (e) => {
+    e.preventDefault();
+    setAlert("You have successfully logged out", "danger");
+  };
+
   return (
-    <nav className="offcanvas-navigation" id="offcanvas-navigation">
+    <nav className='offcanvas-navigation' id='offcanvas-navigation'>
       <ul>
-        <li className="menu-item-has-children">
-          <Link to={process.env.PUBLIC_URL + "/"}>{strings["home"]}</Link>
+        <li className='menu-item-has-children'>
+          <Link to='/'>Home</Link>
           {/* <ul className="sub-menu">
             <li className="menu-item-has-children">
               <Link to={process.env.PUBLIC_URL + "/"}>
@@ -342,9 +351,9 @@ const MobileNavMenu = ({ strings }) => {
             {strings["collection"]}
           </Link>
         </li> */}
-        <li className="menu-item-has-children">
-          <Link to={process.env.PUBLIC_URL + "/"}>{strings["pages"]}</Link>
-          <ul className="sub-menu">
+        <li className='menu-item-has-children'>
+          <Link to='/'>Pages</Link>
+          <ul className='sub-menu'>
             {/* <li>
               <Link to={process.env.PUBLIC_URL + "/cart"}>
                 {strings["cart"]}
@@ -370,27 +379,32 @@ const MobileNavMenu = ({ strings }) => {
                 {strings["my_account"]}
               </Link>
             </li> */}
+            {isAuthenticated ? (
+              <li onClick={LogOut}>
+                <Link to='/' onClick={logout}>
+                  Logout
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                  login_register
+                </Link>
+              </li>
+            )}
+
             <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>
-                {strings["login_register"]}
-              </Link>
+              <Link to={process.env.PUBLIC_URL + "/about"}>About Us</Link>
             </li>
             <li>
-              <Link to={process.env.PUBLIC_URL + "/about"}>
-                {strings["about_us"]}
-              </Link>
+              <Link to={process.env.PUBLIC_URL + "/contact"}>Contact Us</Link>
             </li>
             <li>
-              <Link to={process.env.PUBLIC_URL + "/contact"}>
-                {strings["contact_us"]}
+              <Link to={process.env.PUBLIC_URL + "/vendor-register"}>
+                {/* {strings["contact_us"]} */}
+                Register as a Vendor
               </Link>
             </li>
-            <li>
-            <Link to={process.env.PUBLIC_URL + "/vendor-register"}>
-            {/* {strings["contact_us"]} */}
-              Register as a Vendor
-            </Link>
-          </li>
             {/* <li>
               <Link to={process.env.PUBLIC_URL + "/not-found"}>
                 {strings["404_page"]}
@@ -426,9 +440,7 @@ const MobileNavMenu = ({ strings }) => {
           </ul>
         </li> */}
         <li>
-          <Link to={process.env.PUBLIC_URL + "/contact"}>
-            {strings["contact_us"]}
-          </Link>
+          <Link to={process.env.PUBLIC_URL + "/contact"}>Contact Us</Link>
         </li>
       </ul>
     </nav>
@@ -436,7 +448,15 @@ const MobileNavMenu = ({ strings }) => {
 };
 
 MobileNavMenu.propTypes = {
-  strings: PropTypes.object
+  strings: PropTypes.object,
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
-export default multilanguage(MobileNavMenu);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+// export default multilanguage(MobileNavMenu);
+export default connect(mapStateToProps, { logout, setAlert })(MobileNavMenu);
