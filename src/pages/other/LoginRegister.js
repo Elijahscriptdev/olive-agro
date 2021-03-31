@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import MetaTags from "react-meta-tags";
-import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+// import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -55,12 +55,8 @@ const LoginRegister = ({
     } else {
       register({ firstName, lastName, email, phoneNumber, password });
     }
-    // console.log(formData);
-    // console.log("form submitted");
     history.push("/login-register");
   };
-
-  // login
 
   const handleChange = (e) =>
     setFormData({
@@ -71,9 +67,6 @@ const LoginRegister = ({
   const handleLogin = (e) => {
     e.preventDefault();
     login({ email, password });
-    isAuthenticated
-      ? setAlert("Logged in successful", "success")
-      : setAlert("Incorrect email or password", "danger");
   };
 
   // redirect if login
@@ -84,7 +77,7 @@ const LoginRegister = ({
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | Login</title>
+        <title>Login | Register</title>
         <meta
           name='description'
           content='Compare page of flone react minimalist eCommerce template.'
@@ -168,7 +161,7 @@ const LoginRegister = ({
                                 placeholder='First Name'
                                 name='firstName'
                                 onChange={(e) => onChange(e)}
-                                // required
+                                required
                               />
                               <input
                                 className='p'
@@ -213,7 +206,6 @@ const LoginRegister = ({
                                 minLength='6'
                                 required
                               />
-
                               <div className='button-box'>
                                 <button type='submit'>
                                   <span>Register</span>

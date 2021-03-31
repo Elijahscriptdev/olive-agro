@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setAlert } from "./alert";
 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
@@ -71,7 +72,6 @@ export const register = ({
     });
     dispatch(loadUser());
   } catch (error) {
-    // dispatch(setAlert(error.response.data.errors, "danger"));
     console.log("error", error.response);
     dispatch({
       type: REGISTER_FAIL,
@@ -99,10 +99,10 @@ export const login = ({ email, password }) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    // }
     dispatch(loadUser());
+    dispatch(setAlert("Incorrect email or password", "success"));
   } catch (error) {
-    console.log("error", error);
+    dispatch(setAlert("Incorrect email or password", "danger"));
     dispatch({
       type: LOGIN_FAIL,
     });
