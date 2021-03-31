@@ -2,6 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { listProducts } from "../../redux/actions/productsActions";
+// import {  }
 import PropTypes from "prop-types";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -13,6 +14,9 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
   const productList = useSelector((state) => state.productList);
   const { products, loading } = productList;
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = auth;
+  console.log("user from products", user);
 
   const matchedProduct = products.filter((product) => {
     if (product._id === id) {
