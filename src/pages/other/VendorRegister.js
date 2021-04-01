@@ -15,6 +15,10 @@ import Alert from "./Alert";
 
 const options = [
   {
+    label: "",
+    value: "",
+  },
+  {
     label: "DRIVER'S LINCENSE",
     value: "DRIVER'S LINCENSE",
   },
@@ -125,9 +129,13 @@ const VendorRegister = ({ location, setAlert }) => {
         body,
         config
       );
+      setAlert("Registration Completed", "success");
       history.push("/registration-completed");
     } catch (error) {
-      console.log(error);
+      if (error.response.data.message) {
+        setAlert(error.response.data.message, "danger");
+      }
+      return error;
     }
   };
 
@@ -161,7 +169,10 @@ const VendorRegister = ({ location, setAlert }) => {
       );
       history.push("/registration-completed");
     } catch (error) {
-      console.log(error);
+      if (error.response.data.message) {
+        setAlert(error.response.data.message, "danger");
+      }
+      return error;
     }
   };
 
@@ -298,6 +309,7 @@ const VendorRegister = ({ location, setAlert }) => {
                                 className='select'
                                 value={IDtype}
                                 onChange={(e) => setIDtype(e.target.value)}
+                                required
                               >
                                 {options.map((option, index) => (
                                   <option key={index} value={option.value}>
@@ -356,6 +368,7 @@ const VendorRegister = ({ location, setAlert }) => {
                                   <span>Register</span>
                                 </button>
                               </div>
+                              {/* <Alert /> */}
                             </form>
                           </div>
                         </div>

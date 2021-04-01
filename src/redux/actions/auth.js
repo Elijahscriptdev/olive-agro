@@ -71,11 +71,15 @@ export const register = ({
       payload: res.data,
     });
     dispatch(loadUser());
+    dispatch(setAlert("Registration Successful", "success"));
   } catch (error) {
-    console.log("error", error.response);
+    if (error.response.data.message) {
+      dispatch(setAlert(error.response.data.message, "danger"));
+    }
     dispatch({
       type: REGISTER_FAIL,
     });
+    return error
   }
 };
 
@@ -100,14 +104,24 @@ export const login = ({ email, password }) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(loadUser());
-    dispatch(setAlert("Incorrect email or password", "success"));
+    dispatch(setAlert("Login Successful", "success"));
   } catch (error) {
-    dispatch(setAlert("Incorrect email or password", "danger"));
+    if (error.response.data.message) {
+      dispatch(setAlert(error.response.data.message, "danger"));
+    }
     dispatch({
       type: LOGIN_FAIL,
     });
+    return error;
   }
 };
+
+// {
+//   if (error.response.data.message) {
+//     setAlert(error.response.data.message, "danger");
+//   }
+//   return error;
+// }
 
 // LOGOUT
 export const logout = () => (dispatch) => {

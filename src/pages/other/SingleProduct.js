@@ -15,8 +15,8 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
   const { products, loading } = productList;
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const { isAuthenticated, user } = auth;
-  console.log("user from products", user);
+  // const { isAuthenticated, user } = auth;
+  // console.log("user from products", user);
 
   const matchedProduct = products.filter((product) => {
     if (product._id === id) {
