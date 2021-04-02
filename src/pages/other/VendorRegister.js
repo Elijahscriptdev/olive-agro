@@ -190,7 +190,7 @@ const VendorRegister = ({ location, setAlert }) => {
         Vendor Register
       </BreadcrumbsItem>
       <LayoutOne headerTop='visible'>
-        <Breadcrumb />
+        {/* <Breadcrumb /> */}
         <div className='login-register-area pt-100 pb-100'>
           <div className='container'>
             <div className='row'>
@@ -350,7 +350,7 @@ const VendorRegister = ({ location, setAlert }) => {
                                 value={password}
                                 name='password'
                                 onChange={(e) => setPassword(e.target.value)}
-                                minLength='6'
+                                minLength='8'
                               />
 
                               <label>Confirm Password</label>
@@ -360,7 +360,7 @@ const VendorRegister = ({ location, setAlert }) => {
                                 value={password2}
                                 name='password2'
                                 onChange={(e) => setPassword2(e.target.value)}
-                                minLength='6'
+                                minLength='8'
                               />
 
                               <div className='button-box'>
