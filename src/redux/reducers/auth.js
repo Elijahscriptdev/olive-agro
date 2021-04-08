@@ -6,6 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL,
 } from "../actions/auth";
 
 const initialState = {
@@ -39,6 +41,10 @@ export default function (state = initialState, action) {
         loading: false,
         admin: payload.admin,
       };
+    case FORGOT_PASSWORD_SUCCESS:
+      return { ...state, payload };
+    case FORGOT_PASSWORD_FAIL:
+      return { ...state };
     case REGISTER_FAIL:
     case LOGOUT:
     case LOGIN_FAIL:

@@ -10,6 +10,9 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 
+export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
+export const FORGOT_PASSWORD_FAIL = "FORGOT_PASSWORD_FAIL";
+
 export const LOGOUT = "LOGOUT";
 
 // LOAD user
@@ -116,12 +119,38 @@ export const login = ({ email, password }) => async (dispatch) => {
   }
 };
 
-// {
-//   if (error.response.data.message) {
-//     setAlert(error.response.data.message, "danger");
-//   }
-//   return error;
-// }
+// Forgot password
+export const forgotPassword = ({ email }) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const body = JSON.stringify({ email });
+
+  try {
+    const res = await axios.post(
+      "https://www.api.oliveagro.org/api/auth/forgot-password",
+      body,
+      config
+    );
+    dispatch({
+      type: FORGOT_PASSWORD_SUCCESS,
+      payload: res.data,
+    });
+    dispatch(setAlert(res.data.message, "success"));
+  } catch (error) {
+    if (error.response.data.message) {
+      dispatch(setAlert(error.response.data.message, "danger"));
+    }
+    dispatch({
+      type: FORGOT_PASSWORD_FAIL,
+    });
+    return error;
+  }
+};
+
 
 // LOGOUT
 export const logout = () => (dispatch) => {

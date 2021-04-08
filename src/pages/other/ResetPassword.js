@@ -1,14 +1,18 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { forgotPassword } from "../../redux/actions/auth";
+import { useDispatch } from "react-redux";
+import Alert from "./Alert";
 
 const ResetPassword = ({ location }) => {
   const { pathname } = location;
-  let history = useHistory();
+  // let history = useHistory();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -31,9 +35,9 @@ const ResetPassword = ({ location }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    console.log("form submitted");
-    history.push("/forgot-password");
+    dispatch(forgotPassword({ email }));
+    // history.push("/login-register");
+    resetForm();
   };
 
   return (
@@ -69,7 +73,7 @@ const ResetPassword = ({ location }) => {
                         <input
                           name='email'
                           placeholder='***********'
-                          type='text'
+                          type='email'
                           value={email}
                           onChange={(e) => onChange(e)}
                           required
@@ -84,6 +88,7 @@ const ResetPassword = ({ location }) => {
                   </form>
                   <p className='form-messege' />
                 </div>
+                <Alert />
               </div>
             </div>
           </div>
