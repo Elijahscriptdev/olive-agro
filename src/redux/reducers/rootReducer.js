@@ -12,7 +12,7 @@ import alert from "./alert";
 import { combineReducers } from "redux";
 import { createMultilanguageReducer } from "redux-multilanguage";
 import productsReducerCat from "./productsReducerCat";
-// import contactAdminVendorReducer from "./contactAdminVendorReducer";
+import contactAdminVendorReducer from "./contactAdminVendorReducer";
 
 const rootReducer = combineReducers({
   multilanguage: createMultilanguageReducer({ currentLanguageCode: "en" }),
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
   subCategoryList: subCategoriesReducer,
   productListCat: productsReducerCat,
   alert,
-  // contactAdminVendor: contactAdminVendorReducer,
+  contactAdminVendor: contactAdminVendorReducer,
 });
 
 export default rootReducer;

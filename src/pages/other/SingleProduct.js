@@ -1,8 +1,8 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { listProducts } from "../../redux/actions/productsActions";
-// import {  }
 import PropTypes from "prop-types";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -15,14 +15,20 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
   const { products, loading } = productList;
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  // const { isAuthenticated, user } = auth;
-  // console.log("user from products", user);
+  const { isAuthenticated, user } = auth;
+  let history = useHistory();
 
   const matchedProduct = products.filter((product) => {
     if (product._id === id) {
       return product;
     }
   });
+
+  const checkAuth = () => {
+    if(!isAuthenticated){
+      history.push("/login-register");
+    } 
+  }
 
   useEffect(() => {
     dispatch(listProducts());
@@ -72,8 +78,10 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
                         <p>₦{product.price_range}</p>
                         <p>Quantity: {product.quantity}</p>
                         <p>Category: {product.category_name}</p>
-                        <ContactVendor className='product-detail-btn' />
-                        <ContactAdmin className='product-detail-btn' />
+                        <div onClick={checkAuth}>
+                          <ContactVendor className='product-detail-btn' />
+                          <ContactAdmin className='product-detail-btn' />
+                        </div>
                       </div>
                     </div>
                   </Fragment>

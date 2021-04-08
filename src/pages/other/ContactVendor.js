@@ -1,8 +1,11 @@
 import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
 import axios from "axios";
 import React, { useState } from "react";
+import { contactVendor } from "../../redux/actions/contactAdminVendorActions";
+import { useDispatch } from "react-redux";
 
 const ContactVendor = () => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -10,11 +13,11 @@ const ContactVendor = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    buyer_email: "",
     message: "",
   });
 
-  const { name, email, message } = formData;
+  const { name, buyer_email, message } = formData;
 
   const onChange = (e) => {
     setFormData({
@@ -25,29 +28,8 @@ const ContactVendor = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-    // const body = {
-    //   name,
-    //   email,
-    //   message,
-    // };
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    try {
-      const res = await axios.post(
-        "https://www.api.oliveagro.org/api/users/create/messsage",
-        formData,
-        config
-      );
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(contactVendor({ name, buyer_email, message }));
+    console.log(formData)
   };
 
   return (
@@ -67,7 +49,7 @@ const ContactVendor = () => {
                 <Row form>
                   <Col md={6}>
                     <FormGroup>
-                      <label >Name</label>
+                      <label>Name</label>
                       <input
                         type='text'
                         name='name'
@@ -79,11 +61,11 @@ const ContactVendor = () => {
                   </Col>
                   <Col md={6}>
                     <FormGroup>
-                      <label >Email</label>
+                      <label>Email</label>
                       <input
                         type='email'
-                        name='email'
-                        value={email}
+                        name='buyer_email'
+                        value={buyer_email}
                         onChange={(e) => onChange(e)}
                         required
                       />
@@ -93,7 +75,7 @@ const ContactVendor = () => {
                 <Row>
                   <Col md={12}>
                     <FormGroup>
-                      <label >Message</label>
+                      <label>Message</label>
                       <input
                         type='textarea'
                         className='textarea'
