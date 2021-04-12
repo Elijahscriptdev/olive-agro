@@ -4,35 +4,62 @@ import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
-// import LocationMap from "../../components/contact/LocationMap";
-// import * as emailjs from "emailjs-com";
+import { useParams, useHistory } from "react-router-dom";
+import axios from "axios";
 
 const ForgotPassword = ({ location }) => {
   const { pathname } = location;
+  let history = useHistory();
 
   const [formData, setFormData] = useState({
-    newPassword: "",
+    password: "",
+    password2: "",
   });
 
-  const { newPassword } = formData;
+  const id = useParams();
+  const token = id.token;
+  // console.log(token)
 
-  // const resetForm = () => {
-  //   setFormData({
-  //     newPassword: "",
-  //   });
-  // };
+  const { password, password2 } = formData;
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    console.log("form submitted");
+
+    if (password !== password2) {
+      alert("Passwords dont match");
+    }
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = JSON.stringify({
+      password: "",
+    });
+
+    try {
+      console.log(token);
+      const res = await axios.post(
+        `https://www.api.oliveagro.org/api/auth/reset-password/${token}`,
+        body,
+        config
+      );
+      console.log(res);
+      alert("password changed successfully");
+      history.push("/login-register");
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
   };
 
   return (
@@ -62,16 +89,26 @@ const ForgotPassword = ({ location }) => {
                   </div>
                   <form
                     className='contact-form-style'
-                    onSubmit={(e) => onSubmit(e)}
+                    onSubmit={(e) => handleResetPassword(e)}
                   >
                     <div className='row'>
                       <div className='col-lg-12 forgot'>
                         <input
-                          name='newPassword'
-                          placeholder='***********'
-                          type='text'
-                          value={newPassword}
-                          onChange={(e) => onChange(e)}
+                          name='password'
+                          placeholder='New Password'
+                          type='password'
+                          value={password}
+                          onChange={(e) => handleChange(e)}
+                          required
+                        />
+                      </div>
+                      <div className='col-lg-12 forgot'>
+                        <input
+                          name='password2'
+                          placeholder='Confirm Password'
+                          type='password'
+                          value={password2}
+                          onChange={(e) => handleChange(e)}
                           required
                         />
                       </div>

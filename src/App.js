@@ -455,7 +455,7 @@ const App = (props) => {
                 />
 
                 <Route
-                  path={process.env.PUBLIC_URL + "/forgot-password"}
+                  path={process.env.PUBLIC_URL + "/forgot-password/:token"}
                   component={ForgotPassword}
                 />
 

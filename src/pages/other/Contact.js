@@ -103,10 +103,10 @@ const Contact = ({ location }) => {
                     </div>
                     <div className='contact-info-dec'>
                       <p>
-                        <a href='mailto:urname@email.com'>Info@oliveagro.org</a>
+                        <a href='mailto:urname@email.com'>Oliveagro1@gmail.com</a>
                       </p>
                       <p>
-                        <a href='//urwebsitenaem.com'>oliveagro.org</a>
+                        <a href='//oliveagro.org'>oliveagro.org</a>
                       </p>
                     </div>
                   </div>
@@ -145,6 +145,11 @@ const Contact = ({ location }) => {
                       <li>
                         <a href='//twitter.com'>
                           <i className='fa fa-twitter' />
+                        </a>
+                      </li>
+                      <li>
+                        <a href='//instagram.com/Olive_agro/'>
+                          <i className='fa fa-instagram ' />
                         </a>
                       </li>
                     </ul>
