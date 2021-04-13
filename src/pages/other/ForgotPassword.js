@@ -12,15 +12,15 @@ const ForgotPassword = ({ location }) => {
   let history = useHistory();
 
   const [formData, setFormData] = useState({
-    password: "",
-    password2: "",
+    newPassword: "",
+    newPassword2: "",
   });
 
   const id = useParams();
   const token = id.token;
   // console.log(token)
 
-  const { password, password2 } = formData;
+  const { newPassword, newPassword2 } = formData;
 
   const handleChange = (e) => {
     setFormData({
@@ -32,7 +32,7 @@ const ForgotPassword = ({ location }) => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
 
-    if (password !== password2) {
+    if (newPassword !== newPassword2) {
       alert("Passwords dont match");
     }
 
@@ -43,12 +43,12 @@ const ForgotPassword = ({ location }) => {
     };
 
     const body = JSON.stringify({
-      password: "",
+      newPassword
     });
 
     try {
-      console.log(token);
-      const res = await axios.post(
+      console.log(body);
+      const res = await axios.patch(
         `https://www.api.oliveagro.org/api/auth/reset-password/${token}`,
         body,
         config
@@ -58,7 +58,7 @@ const ForgotPassword = ({ location }) => {
       history.push("/login-register");
     } catch (error) {
       console.log(error);
-      alert(error);
+      alert(error.response.data.message);
     }
   };
 
@@ -94,20 +94,20 @@ const ForgotPassword = ({ location }) => {
                     <div className='row'>
                       <div className='col-lg-12 forgot'>
                         <input
-                          name='password'
+                          name='newPassword'
                           placeholder='New Password'
                           type='password'
-                          value={password}
+                          value={newPassword}
                           onChange={(e) => handleChange(e)}
                           required
                         />
                       </div>
                       <div className='col-lg-12 forgot'>
                         <input
-                          name='password2'
+                          name='newPassword2'
                           placeholder='Confirm Password'
                           type='password'
-                          value={password2}
+                          value={newPassword2}
                           onChange={(e) => handleChange(e)}
                           required
                         />

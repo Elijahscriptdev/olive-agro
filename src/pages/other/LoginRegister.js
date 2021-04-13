@@ -67,7 +67,7 @@ const LoginRegister = ({
   const handleLogin = (e) => {
     e.preventDefault();
     login({ email, password });
-    history.goBack();
+    // history.goBack();
   };
 
   // redirect if login
