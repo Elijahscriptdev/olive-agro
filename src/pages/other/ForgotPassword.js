@@ -6,10 +6,12 @@ import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const ForgotPassword = ({ location }) => {
   const { pathname } = location;
   let history = useHistory();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     newPassword: "",

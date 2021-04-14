@@ -1,23 +1,29 @@
 import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
 import axios from "axios";
 import React, { useState } from "react";
-import { contactVendor } from "../../redux/actions/contactAdminVendorActions";
 import { useDispatch } from "react-redux";
+import { loadUser } from "../../redux/actions/auth";
+import { setAlert } from "../../redux/actions/alert";
 
 const ContactVendor = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    if(name === "" || seller_email === "" || message === ""){
+      return
+    }
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
   const [formData, setFormData] = useState({
     name: "",
-    buyer_email: "",
+    seller_email: "",
     message: "",
   });
 
-  const { name, buyer_email, message } = formData;
+  const { name, seller_email, message } = formData;
 
   const onChange = (e) => {
     setFormData({
@@ -28,8 +34,26 @@ const ContactVendor = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch(contactVendor({ name, buyer_email, message }));
-    console.log(formData)
+    dispatch(loadUser());
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "https://www.api.oliveagro.org/api/users/create/messsage",
+        formData,
+        config
+      );
+      console.log(res);
+      dispatch(setAlert("Message has been sent to the vendor", "success"));
+    } catch (error) {
+      dispatch(setAlert("Message was not sent, try again", "danger"));
+    }
   };
 
   return (
@@ -46,7 +70,7 @@ const ContactVendor = () => {
           <Row>
             <Col xs='12' md='6' className='m-auto'>
               <Form onSubmit={(e) => onSubmit(e)}>
-                <Row form>
+                <Row>
                   <Col md={6}>
                     <FormGroup>
                       <label>Name</label>
@@ -64,8 +88,8 @@ const ContactVendor = () => {
                       <label>Email</label>
                       <input
                         type='email'
-                        name='buyer_email'
-                        value={buyer_email}
+                        name='seller_email'
+                        value={seller_email}
                         onChange={(e) => onChange(e)}
                         required
                       />

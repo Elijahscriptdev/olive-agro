@@ -74,7 +74,7 @@ const ContactAdmin = () => {
           <Row>
             <Col xs='12' md='6' className='m-auto'>
               <Form onSubmit={(e) => onSubmit(e)}>
-                <Row form>
+                <Row>
                   <Col md={12}>
                     <FormGroup>
                       <label>Document</label>
