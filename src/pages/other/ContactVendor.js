@@ -1,25 +1,25 @@
 import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "../../redux/actions/auth";
 import { setAlert } from "../../redux/actions/alert";
 
-const ContactVendor = () => {
+const ContactVendor = ({ product }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
-    if(name === "" || seller_email === "" || message === ""){
-      return
+    if (name === "" || seller_email === "" || message === "") {
+      return;
     }
     setShow(false);
-  }
+  };
   const handleShow = () => setShow(true);
 
   const [formData, setFormData] = useState({
     name: "",
-    seller_email: "",
+    seller_email: localStorage.getItem("vendor email"),
     message: "",
   });
 
@@ -31,6 +31,28 @@ const ContactVendor = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const getVendorEmail = async () => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const res = await axios.get(
+        `https://www.api.oliveagro.org/api/merchant/${product.user}`,
+        config
+      );
+      localStorage.setItem("vendor email", res.data.merchant.email);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getVendorEmail();
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -90,7 +112,7 @@ const ContactVendor = () => {
                         type='email'
                         name='seller_email'
                         value={seller_email}
-                        onChange={(e) => onChange(e)}
+                        // onChange={(e) => onChange(e)}
                         required
                       />
                     </FormGroup>

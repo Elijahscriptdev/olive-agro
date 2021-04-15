@@ -25,10 +25,10 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
   });
 
   const checkAuth = () => {
-    if(!isAuthenticated){
+    if (!isAuthenticated) {
       history.push("/login-register");
-    } 
-  }
+    }
+  };
 
   useEffect(() => {
     dispatch(listProducts());
@@ -79,7 +79,10 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
                         <p>Quantity: {product.quantity}</p>
                         <p>Category: {product.category_name}</p>
                         <div onClick={checkAuth}>
-                          <ContactVendor className='product-detail-btn' />
+                          <ContactVendor
+                            className='product-detail-btn'
+                            product={product}
+                          />
                           <ContactAdmin className='product-detail-btn' />
                         </div>
                       </div>
