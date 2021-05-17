@@ -159,7 +159,7 @@ const App = (props) => {
                 />
 
                 {/* Homepages */}
-                <Route
+                {/* <Route
                   path={process.env.PUBLIC_URL + "/home-fashion"}
                   component={HomeFashion}
                 />
@@ -310,10 +310,10 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/home-valentines-day"}
                   component={HomeValentinesDay}
-                />
+                /> */}
 
                 {/* Shop pages */}
-                <Route
+                {/* <Route
                   path={process.env.PUBLIC_URL + "/shop-grid-standard"}
                   component={ShopGridStandard}
                 />
@@ -348,7 +348,7 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/shop-list-two-column"}
                   component={ShopListTwoColumn}
-                />
+                /> */}
 
                 {/* Shop product pages */}
                 {/* <Route
@@ -357,7 +357,7 @@ const App = (props) => {
                     <Product {...routeProps} key={routeProps.match.params.id} />
                   )}
                 /> */}
-                <Route
+                {/* <Route
                   path={process.env.PUBLIC_URL + "/product-tab-left/:id"}
                   component={ProductTabLeft}
                 />
@@ -376,10 +376,10 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/product-fixed-image/:id"}
                   component={ProductFixedImage}
-                />
+                /> */}
 
                 {/* Blog pages */}
-                <Route
+                {/* <Route
                   path={process.env.PUBLIC_URL + "/blog-standard"}
                   component={BlogStandard}
                 />
@@ -394,7 +394,7 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/blog-details-standard"}
                   component={BlogDetailsStandard}
-                />
+                /> */}
 
                 {/* Other pages */}
                 <Route
@@ -464,7 +464,7 @@ const App = (props) => {
                   component={ResetPassword}
                 />
 
-                <Route
+                {/* <Route
                   path={process.env.PUBLIC_URL + "/cart"}
                   component={Cart}
                 />
@@ -484,7 +484,7 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/not-found"}
                   component={NotFound}
-                />
+                /> */}
 
                 <Route exact component={NotFound} />
               </Switch>
