@@ -167,6 +167,7 @@ const VendorRegister = ({ location, setAlert }) => {
         body,
         config
       );
+      setAlert("Registration Completed", "success");
       history.push("/registration-completed");
     } catch (error) {
       if (error.response.data.message) {
