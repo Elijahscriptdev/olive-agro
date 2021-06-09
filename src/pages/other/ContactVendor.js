@@ -9,12 +9,7 @@ const ContactVendor = ({ product }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
-  const handleClose = () => {
-    if (name === "" || seller_email === "" || message === "") {
-      return;
-    }
-    setShow(false);
-  };
+  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [formData, setFormData] = useState({
@@ -22,6 +17,8 @@ const ContactVendor = ({ product }) => {
     seller_email: localStorage.getItem("vendor email"),
     message: "",
   });
+
+  console.log("seller_email", seller_email)
 
   const { name, seller_email, message } = formData;
 

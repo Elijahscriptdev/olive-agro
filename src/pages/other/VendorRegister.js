@@ -59,6 +59,7 @@ const VendorRegister = ({ location, setAlert }) => {
         "Content-Type": "application/json",
       },
     };
+    
     try {
       const res = await axios.post(
         "https://www.api.oliveagro.org/api/users/upload",

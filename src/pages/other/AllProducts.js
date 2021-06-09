@@ -27,7 +27,7 @@ const AllProducts = ({ sliderClassName, spaceBottomClass }) => {
             {loading ? (
               <div>loading......</div>
             ) : (
-              products.map((product, index) => {
+              products && products.map((product, index) => {
                 return (
                   <div
                     key={index}

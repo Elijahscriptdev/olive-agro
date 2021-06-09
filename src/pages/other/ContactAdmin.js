@@ -1,43 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
+import { setAlert } from "../../redux/actions/alert";
 
 const ContactAdmin = () => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [formData, setFormData] = useState({
-    document: null,
-    description: "",
-  });
+  const [name, setName] = useState("");
+  const [seller_email, setSeller_email] = useState("Support@oliveagro.org");
+  const [message, setMessage] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
 
-  const { document, description } = formData;
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const getImageUrl = async () => {
+    const image = new FormData();
+    image.append("image", imageUrl);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(
+        "https://www.api.oliveagro.org/api/users/upload",
+        image,
+        config
+      );
+      return res.data.image;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleFile = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.files,
-    });
-  };
-
-  const onSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("test1", formData);
-    console.log("test2", formData.document[0]);
 
-    // const document = new FormData();
-    // document.append('document', formData.document[0]);
-    // console.log("doc", document);
+    const sImg = await getImageUrl();
+
     const token = localStorage.getItem("token");
     const config = {
       headers: {
@@ -45,18 +48,16 @@ const ContactAdmin = () => {
       },
     };
 
-    const document = formData.document[0];
-
-    const body = { document, description };
     try {
       const res = await axios.post(
-        "https://www.api.oliveagro.org/api/individual/upload/doc",
-        body,
+        "https://www.api.oliveagro.org/api/users/create/messsage",
+        { name, seller_email, message, imageUrl: sImg },
         config
       );
       console.log(res);
+      dispatch(setAlert("Message has been sent to the Admin", "success"));
     } catch (error) {
-      console.log(error);
+      dispatch(setAlert("Message was not sent, try again", "danger"));
     }
   };
 
@@ -73,15 +74,28 @@ const ContactAdmin = () => {
         <Modal.Body>
           <Row>
             <Col xs='12' md='6' className='m-auto'>
-              <Form onSubmit={(e) => onSubmit(e)}>
+              <Form onSubmit={(e) => handleSubmit(e)}>
                 <Row>
-                  <Col md={12}>
+                  <Col md={6}>
                     <FormGroup>
-                      <label>Document</label>
+                      <label>Name</label>
                       <input
-                        type='file'
-                        name='document'
-                        onChange={(e) => handleFile(e)}
+                        type='text'
+                        name='name'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md={6}>
+                    <FormGroup>
+                      <label>Email</label>
+                      <input
+                        type='email'
+                        name='seller_email'
+                        value={seller_email}
+                        // onChange={(e) => onChange(e)}
                         required
                       />
                     </FormGroup>
@@ -90,13 +104,27 @@ const ContactAdmin = () => {
                 <Row>
                   <Col md={12}>
                     <FormGroup>
-                      <label>Description</label>
+                      <label>Message</label>
                       <input
                         type='textarea'
                         className='textarea'
-                        name='description'
-                        value={description}
-                        onChange={(e) => handleChange(e)}
+                        name='message'
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        required
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12}>
+                    <FormGroup>
+                      <label>Upload</label>
+                      <input
+                        type='file'
+                        placeholder=''
+                        name='imageUrl'
+                        onChange={(e) => setImageUrl(e.target.files[0])}
                         required
                       />
                     </FormGroup>

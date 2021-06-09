@@ -25,7 +25,7 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
       <LayoutOne headerTop='visible'>
         <div className='container'>
           <div className='row'>
-            {categories.map((category, index) => {
+            {categories && categories.map((category, index) => {
               return (
                 <div
                   key={index}
