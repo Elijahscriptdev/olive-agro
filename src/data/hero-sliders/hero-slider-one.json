@@ -3,18 +3,18 @@
     "id": 1,
     "subtitle": "Pest free agricultural products",
     "image": "/assets/img/slider/cashew.jpg",
-    "url": "/shop-grid-standard"
+    "url": "/all-categories"
   },
   {
     "id": 2,
     "subtitle": "Best farmers in town working together",
     "image": "/assets/img/slider/single-slide-1.png",
-    "url": "/shop-grid-standard"
+    "url": "/all-categories"
   },
   {
     "id": 3,
     "subtitle": "Quality farm produce",
     "image": "/assets/img/slider/tomatoes.jpg",
-    "url": "/shop-grid-standard"
+    "url": "/all-categories"
   }
 ]

@@ -8,6 +8,8 @@ import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
 import ContactAdmin from "./ContactAdmin";
 import ContactVendor from "./ContactVendor";
+import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 
 const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
   const { id } = useParams();
@@ -40,6 +42,11 @@ const SingleProduct = ({ location, sliderClassName, spaceBottomClass }) => {
         <title>Display All Products</title>
         <meta name='Display Products' content='Display Products.' />
       </MetaTags>
+      {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem> */}
+      {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/view-categories"}>
+        Product
+      </BreadcrumbsItem> */}
+      {/* <Breadcrumb /> */}
       <LayoutOne headerTop='visible'>
         <div className='container'>
           <div className='row'>

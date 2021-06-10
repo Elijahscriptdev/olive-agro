@@ -108,20 +108,20 @@ const FooterFour = ({
               </div>
               <div className="footer-list">
                 <ul>
-                  <li>
+                  {/* <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>Returns</Link>
-                  </li>
+                  </li> */}
                   <li>
                   <Link to={process.env.PUBLIC_URL + "/privacy-policy"}>
                   Privacy Policy
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>Size guide</Link>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>FAQs</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

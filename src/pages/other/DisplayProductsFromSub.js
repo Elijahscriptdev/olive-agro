@@ -5,6 +5,8 @@ import { listProducts } from "../../redux/actions/productsActions";
 import PropTypes from "prop-types";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
+import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 
 const DisplayProductsFromSub = ({
   location,
@@ -31,7 +33,13 @@ const DisplayProductsFromSub = ({
         <title>Display All Products</title>
         <meta name='Display Products' content='Display Products.' />
       </MetaTags>
+      {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem> */}
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/all-categories"}>
+        Sub-categories
+      </BreadcrumbsItem>
+      {/* breadcrumb */}
       <LayoutOne headerTop='visible'>
+        <Breadcrumb />
         <div className='container'>
           <div className='row'>
             {loading ? (
@@ -45,7 +53,7 @@ const DisplayProductsFromSub = ({
                 return (
                   <div
                     key={id}
-                    className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
+                    className={`col-xl-3 my-5 col-md-6 col-lg-4 col-sm-6 ${
                       sliderClassName ? sliderClassName : ""
                     }`}
                   >
@@ -54,16 +62,16 @@ const DisplayProductsFromSub = ({
                         spaceBottomClass ? spaceBottomClass : ""
                       }`}
                     >
-                      <div className='product-img'>
+                      <div className='product-img '>
                         <Link to={`/product/${product._id}`}>
+                          <h4>Product: {product.name}</h4>
                           <img
-                            className='default-img mt-4'
+                            className='default-img my-2'
                             src={process.env.PUBLIC_URL + product.imageUrl}
                             alt=''
                           />
-                          <h4>{product.name}</h4>
                         </Link>
-                        <h4>{product.category_name}</h4>
+                        <h4>Category: {product.category_name}</h4>
                       </div>
                     </div>
                   </div>

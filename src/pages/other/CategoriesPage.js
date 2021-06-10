@@ -8,7 +8,7 @@ import LayoutOne from "../../layouts/LayoutOne";
 import { listCategories } from "../../redux/actions/categoriesActions";
 import { Link } from "react-router-dom";
 
-const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
+const CategoriesPage = ({ sliderClassName, spaceBottomClass }) => {
   // const { pathname } = location;
 
   const categoryList = useSelector((state) => state.categoryList);
@@ -23,17 +23,18 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Display All Products</title>
+        <title>Display All Categories</title>
         <meta name='Display Products' content='Display Products.' />
       </MetaTags>
       {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem> */}
-      {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/view-categories"}>
+      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/all-categories"}>
         Categories
-      </BreadcrumbsItem> */}
-        {/* breadcrumb */}
-        {/* <Breadcrumb /> */}
+      </BreadcrumbsItem>
+      {/* breadcrumb */}
+
       <LayoutOne headerTop='visible'>
-        <div className='container'>
+        <Breadcrumb />
+        <div className='container my-5'>
           <div className='row'>
             {categories &&
               categories.map((category, index) => {
@@ -51,12 +52,12 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
                     >
                       <div className='product-img'>
                         <Link to={`/from-cat?${category._id}`}>
+                          <h4 className='text-center mt-5'>{category.name}</h4>
                           <img
-                            className='default-img mt-4'
+                            className='default-img '
                             src={category.imageUrl}
                             alt=''
                           />
-                          <h4>{category.name}</h4>
                         </Link>
                       </div>
                     </div>
@@ -70,10 +71,10 @@ const AllCategories = ({ sliderClassName, spaceBottomClass }) => {
   );
 };
 
-AllCategories.propTypes = {
+CategoriesPage.propTypes = {
   spaceBottomClass: PropTypes.string,
   wishlistItem: PropTypes.object,
   // location: PropTypes.object,
 };
 
-export default AllCategories;
+export default CategoriesPage;

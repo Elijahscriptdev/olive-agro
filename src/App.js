@@ -106,6 +106,7 @@ const VendorRegister = lazy(() => import("./pages/other/VendorRegister"));
 const PrivatePolicy = lazy(() => import("./pages/other/PrivatePolicy"));
 const AllProducts = lazy(() => import("./pages/other/AllProducts"));
 const AllCategories = lazy(() => import("./pages/other/AllCategories"));
+const CategoriesPage = lazy(() => import("./pages/other/CategoriesPage"));
 const SubCategories = lazy(() => import("./pages/other/SubCategories"));
 const SingleProduct = lazy(() => import("./pages/other/SingleProduct"));
 const DisplayProductsFromSub = lazy(() =>
@@ -437,6 +438,11 @@ const App = (props) => {
                 <Route
                   path={process.env.PUBLIC_URL + "/view-categories"}
                   component={AllCategories}
+                />
+
+                <Route
+                  path={process.env.PUBLIC_URL + "/all-categories"}
+                  component={CategoriesPage}
                 />
 
                 <Route
