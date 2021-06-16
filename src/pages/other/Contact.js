@@ -1,13 +1,17 @@
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 // import LocationMap from "../../components/contact/LocationMap";
-// import * as emailjs from "emailjs-com";
+import * as emailjs from "emailjs-com";
+import { setAlert } from "../../redux/actions/alert";
+import Alert from "./Alert";
 
 const Contact = ({ location }) => {
+  const dispatch = useDispatch();
   const { pathname } = location;
 
   const [formData, setFormData] = useState({
@@ -37,28 +41,30 @@ const Contact = ({ location }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // console.log(formData);
-    // console.log("form submitted");
+    console.log(formData);
+    console.log("form submitted");
 
-    // var SERVICE_ID = "service_qdlw33x";
-    // var TEMPLATE_ID = "template_xc2y67d";
-    // var USER_ID = "user_4JEblKGUlOUD74wFkexDE";
+    var SERVICE_ID = "service_u3oq3un";
+    var TEMPLATE_ID = "template_el672hi";
+    var USER_ID = "user_XmeWHiHC4FtKHSriDqGLM";
 
-    // let templateParams = {
-    //   from_name: email,
-    //   to_name: "elijahobominuru@gmail.com",
-    //   subject: subject,
-    //   message_html: message,
-    // };
+    let templateParams = {
+      from_name: email,
+      to_name: "Oliveagro1@gmail.com",
+      subject: subject,
+      message_html: message,
+    };
 
-    // emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
-    //   function (response) {
-    //     console.log(response.status, response.text);
-    //   },
-    //   function (err) {
-    //     console.log(err);
-    //   }
-    // );
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
+      function (response) {
+        console.log(response.status, response.text);
+        dispatch(setAlert("Message has been sent", "success"));
+      },
+      function (err) {
+        console.log(err);
+        dispatch(setAlert("Message was not sent, try again", "danger"));
+      }
+    );
 
     resetForm();
   };
@@ -212,8 +218,10 @@ const Contact = ({ location }) => {
                     </div>
                   </form>
                   <p className='form-messege' />
+                  <Alert />
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
